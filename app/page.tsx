@@ -1,6 +1,6 @@
 /**
  * v0 by Vercel.
- * @see https://v0.dev/t/LUmM0ASmbHM
+ * @see https://v0.dev/t/exU4sKwzoLX
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
@@ -12,7 +12,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 export default function Component() {
 	return (
 		<div className="flex flex-col h-screen">
-			<header className="bg-background border-b flex items-center justify-between px-4 py-2 sm:px-6">
+			<header className="bg-background border-b fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2 sm:px-6">
 				<Link href="#" className="flex items-center gap-2" prefetch={false}>
 					<MountainIcon className="w-6 h-6" />
 					<span className="text-lg font-semibold">Acme Inc</span>
@@ -88,7 +88,7 @@ export default function Component() {
 					</Link>
 				</nav>
 			</header>
-			<main className="flex-1 overflow-auto">
+			<ScrollArea className="flex-1 overflow-auto">
 				<div className="px-4 py-6 sm:px-6">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-4">
@@ -175,125 +175,127 @@ export default function Component() {
 							<span className="text-sm font-medium">Watches</span>
 						</Link>
 					</div>
-				</div>
-				<div className="border-t">
-					<div className="px-4 py-3 flex items-center justify-between sm:px-6">
-						<h2 className="text-lg font-semibold">Featured Products</h2>
-						<Link
-							href="#"
-							className="text-primary underline underline-offset-4"
-							prefetch={false}>
-							See all
-						</Link>
-					</div>
-					<ScrollArea className="h-[400px]">
-						<div className="grid grid-cols-2 gap-4 p-4 sm:grid-cols-4">
-							<Card className="overflow-hidden">
-								<CardContent className="p-0">
-									<img
-										src="/placeholder.svg"
-										width={300}
-										height={300}
-										alt="Product Image"
-										className="w-full aspect-square object-cover"
-									/>
-								</CardContent>
-								<CardFooter className="px-4 py-3">
-									<div className="flex flex-col">
-										<div className="flex items-center justify-between">
-											<div>
-												<h3 className="text-base font-semibold">
-													Cozy Cotton Sweater
-												</h3>
-												<p className="text-sm text-muted-foreground">
-													Soft and comfortable
-												</p>
-											</div>
-										</div>
-										<div className="text-lg font-semibold mt-2">$49.99</div>
-									</div>
-								</CardFooter>
-							</Card>
-							<Card className="overflow-hidden">
-								<CardContent className="p-0">
-									<img
-										src="/placeholder.svg"
-										width={300}
-										height={300}
-										alt="Product Image"
-										className="w-full aspect-square object-cover"
-									/>
-								</CardContent>
-								<CardFooter className="px-4 py-3">
-									<div className="flex flex-col">
-										<div className="flex items-center justify-between">
-											<div>
-												<h3 className="text-base font-semibold">
-													Leather Backpack
-												</h3>
-												<p className="text-sm text-muted-foreground">
-													Durable and stylish
-												</p>
-											</div>
-										</div>
-										<div className="text-lg font-semibold mt-2">$79.99</div>
-									</div>
-								</CardFooter>
-							</Card>
-							<Card className="overflow-hidden">
-								<CardContent className="p-0">
-									<img
-										src="/placeholder.svg"
-										width={300}
-										height={300}
-										alt="Product Image"
-										className="w-full aspect-square object-cover"
-									/>
-								</CardContent>
-								<CardFooter className="px-4 py-3">
-									<div className="flex flex-col">
-										<div className="flex items-center justify-between">
-											<div>
-												<h3 className="text-base font-semibold">
-													Wireless Headphones
-												</h3>
-												<p className="text-sm text-muted-foreground">
-													High-quality audio
-												</p>
-											</div>
-										</div>
-										<div className="text-lg font-semibold mt-2">$99.99</div>
-									</div>
-								</CardFooter>
-							</Card>
-							<Card className="overflow-hidden">
-								<CardContent className="p-0">
-									<img
-										src="/placeholder.svg"
-										width={300}
-										height={300}
-										alt="Product Image"
-										className="w-full aspect-square object-cover"
-									/>
-								</CardContent>
-								<CardFooter className="px-4 py-3">
-									<div className="flex flex-col">
-										<div className="flex items-center justify-between">
-											<div>
-												<h3 className="text-base font-semibold">Denim Jeans</h3>
-												<p className="text-sm text-muted-foreground">
-													Classic and comfortable
-												</p>
-											</div>
-										</div>
-										<div className="text-lg font-semibold mt-2">$59.99</div>
-									</div>
-								</CardFooter>
-							</Card>
+					<div className="border-t">
+						<div className="px-4 py-3 flex items-center justify-between sm:px-6">
+							<h2 className="text-lg font-semibold">Featured Products</h2>
+							<Link
+								href="#"
+								className="text-primary underline underline-offset-4"
+								prefetch={false}>
+								See all
+							</Link>
 						</div>
-					</ScrollArea>
+						<ScrollArea className="h-[400px]">
+							<div className="grid grid-cols-2 gap-4 p-4 sm:grid-cols-4">
+								<Card className="overflow-hidden">
+									<CardContent className="p-0">
+										<img
+											src="/placeholder.svg"
+											width={300}
+											height={300}
+											alt="Product Image"
+											className="w-full aspect-square object-cover"
+										/>
+									</CardContent>
+									<CardFooter className="px-4 py-3">
+										<div className="flex flex-col">
+											<div className="flex items-center justify-between">
+												<div>
+													<h3 className="text-base font-semibold">
+														Cozy Cotton Sweater
+													</h3>
+													<p className="text-sm text-muted-foreground">
+														Soft and comfortable
+													</p>
+												</div>
+											</div>
+											<div className="text-lg font-semibold mt-2">$49.99</div>
+										</div>
+									</CardFooter>
+								</Card>
+								<Card className="overflow-hidden">
+									<CardContent className="p-0">
+										<img
+											src="/placeholder.svg"
+											width={300}
+											height={300}
+											alt="Product Image"
+											className="w-full aspect-square object-cover"
+										/>
+									</CardContent>
+									<CardFooter className="px-4 py-3">
+										<div className="flex flex-col">
+											<div className="flex items-center justify-between">
+												<div>
+													<h3 className="text-base font-semibold">
+														Leather Backpack
+													</h3>
+													<p className="text-sm text-muted-foreground">
+														Durable and stylish
+													</p>
+												</div>
+											</div>
+											<div className="text-lg font-semibold mt-2">$79.99</div>
+										</div>
+									</CardFooter>
+								</Card>
+								<Card className="overflow-hidden">
+									<CardContent className="p-0">
+										<img
+											src="/placeholder.svg"
+											width={300}
+											height={300}
+											alt="Product Image"
+											className="w-full aspect-square object-cover"
+										/>
+									</CardContent>
+									<CardFooter className="px-4 py-3">
+										<div className="flex flex-col">
+											<div className="flex items-center justify-between">
+												<div>
+													<h3 className="text-base font-semibold">
+														Wireless Headphones
+													</h3>
+													<p className="text-sm text-muted-foreground">
+														High-quality audio
+													</p>
+												</div>
+											</div>
+											<div className="text-lg font-semibold mt-2">$99.99</div>
+										</div>
+									</CardFooter>
+								</Card>
+								<Card className="overflow-hidden">
+									<CardContent className="p-0">
+										<img
+											src="/placeholder.svg"
+											width={300}
+											height={300}
+											alt="Product Image"
+											className="w-full aspect-square object-cover"
+										/>
+									</CardContent>
+									<CardFooter className="px-4 py-3">
+										<div className="flex flex-col">
+											<div className="flex items-center justify-between">
+												<div>
+													<h3 className="text-base font-semibold">
+														Denim Jeans
+													</h3>
+													<p className="text-sm text-muted-foreground">
+														Classic and comfortable
+													</p>
+												</div>
+											</div>
+											<div className="text-lg font-semibold mt-2">$59.99</div>
+										</div>
+									</CardFooter>
+								</Card>
+							</div>
+						</ScrollArea>
+					</div>
 				</div>
-			</main>
+			</ScrollArea>
 			<nav className="bg-background border-t flex justify-around py-2 fixed bottom-0 w-full">
 				<Link
 					href="#"
