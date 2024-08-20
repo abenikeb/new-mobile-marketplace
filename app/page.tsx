@@ -1,13 +1,13 @@
 /**
  * v0 by Vercel.
- * @see https://v0.dev/t/FDsfdPqdk60
+ * @see https://v0.dev/t/LUmM0ASmbHM
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
-import { Sheet, SheetTrigger, SheetContent } from "@components/ui/sheet";
-import { Button } from "@components/ui/button";
-import { ScrollArea } from "@components/ui/scroll-area";
-import { Card, CardContent, CardFooter } from "@components/ui/card";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function Component() {
 	return (
@@ -294,7 +294,7 @@ export default function Component() {
 					</ScrollArea>
 				</div>
 			</main>
-			<nav className="bg-background border-t flex justify-around py-2">
+			<nav className="bg-background border-t flex justify-around py-2 fixed bottom-0 w-full">
 				<Link
 					href="#"
 					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
