@@ -18,7 +18,7 @@ const Header = () => {
 		<header className="bg-background border-b flex items-center justify-between px-4 py-2 sm:px-6 fixed top-0 right-0 left-0">
 			<Link href="#" className="flex items-center gap-2" prefetch={false}>
 				<MountainIcon className="w-6 h-6" />
-				<span className="text-lg font-semibold">Acme Inc</span>
+				<span className="text-lg font-semibold">Biisho</span>
 			</Link>
 			<Sheet>
 				<SheetTrigger asChild>

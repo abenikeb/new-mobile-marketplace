@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import Header from "@components/Home/header";
 
 const ProductList = () => {
 	return (
-		<div className="border-t">
+		<div className="">
 			<div className="px-4 py-3 flex items-center justify-between sm:px-6">
 				<h2 className="text-lg font-semibold">Featured Products</h2>
 				<Link
@@ -19,7 +18,7 @@ const ProductList = () => {
 				<Card className="overflow-hidden">
 					<CardContent className="p-0">
 						<img
-							src="/placeholder.svg"
+							src="assets/images/product1.jpg"
 							width={300}
 							height={300}
 							alt="Product Image"
@@ -45,7 +44,7 @@ const ProductList = () => {
 				<Card className="overflow-hidden">
 					<CardContent className="p-0">
 						<img
-							src="/placeholder.svg"
+							src="assets/images/product2.jpg"
 							width={300}
 							height={300}
 							alt="Product Image"
@@ -69,7 +68,7 @@ const ProductList = () => {
 				<Card className="overflow-hidden">
 					<CardContent className="p-0">
 						<img
-							src="/placeholder.svg"
+							src="assets/images/product3.jpg"
 							width={300}
 							height={300}
 							alt="Product Image"
@@ -95,7 +94,7 @@ const ProductList = () => {
 				<Card className="overflow-hidden">
 					<CardContent className="p-0">
 						<img
-							src="/placeholder.svg"
+							src="assets/images/product4.jpg"
 							width={300}
 							height={300}
 							alt="Product Image"
