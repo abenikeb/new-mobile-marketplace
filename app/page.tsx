@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Laptop } from "lucide-react";
 import AllProducts from "@components/Home/Products/allProducts";
 import MostPopular from "@components/Home/Products/mostPopular";
-import FeaturedProduct from "@components/Home/Products/FeaturedProduct";
 import TrendingProduct from "@components/Home/Products/trendingProduct";
 import Category from "@components/Home/Products/category";
 import Header from "@components/Home/header";
 import Hero from "@components/Home/hero";
 import Hero2 from "@components/Home/hero2";
+import FeaturedProduct from "@components/Home/Products/FeaturedProduct";
 
 export default function ElectronicsHomePage() {
 	return (

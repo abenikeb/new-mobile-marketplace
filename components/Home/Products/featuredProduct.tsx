@@ -1,25 +1,8 @@
-"use client";
-
-import { useState, FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	ChevronRight,
-	Search,
-	Laptop,
-	User,
-	Menu,
-	Smartphone,
-	Headphones,
-	Camera,
-	Tv,
-	Watch,
-	Gamepad,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 
 const featuredProducts = [
