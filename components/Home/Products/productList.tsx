@@ -33,7 +33,7 @@ const products = [
 ];
 
 const ProductCard = ({ product }: any) => (
-	<Card className="overflow-hidden w-36 flex-shrink-0 transition-transform hover:scale-105">
+	<Card className="overflow-hidden w-[95%] flex-shrink-0 transition-transform hover:scale-105">
 		<CardContent className="p-0">
 			<img
 				src={product.image}

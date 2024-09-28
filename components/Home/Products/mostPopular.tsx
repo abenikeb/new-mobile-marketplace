@@ -33,7 +33,7 @@ const products = [
 ];
 
 const ProductCard = ({ product }: any) => (
-	<Card className="overflow-hidden w-32 flex-shrink-0 transition-transform hover:scale-105">
+	<Card className="overflow-hidden w-[40%] flex-shrink-0 transition-transform hover:scale-105">
 		<CardContent className="p-0">
 			<img
 				src={product.image}
@@ -61,7 +61,7 @@ const MostPopular = () => {
 	return (
 		<div>
 			<div className="px-4 py-1 flex items-center justify-between sm:px-6">
-				<h2 className="text-lg font-semibold">Most Popular</h2>
+				<h2 className="text-xl font-bold">Most Popular</h2>
 				<Link
 					href="#"
 					className="text-primary underline underline-offset-4"

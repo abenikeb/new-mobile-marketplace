@@ -65,7 +65,7 @@ const Category = () => {
 		<div className="py-2 sm:px-4 px-3">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center justify-between w-[100vw]">
-					<h2 className="text-lg font-semibold ">Categories</h2>
+					<h2 className="text-xl font-bold">Categories</h2>
 					<Link
 						href="#"
 						className="text-orange-600 underline underline-offset-4"

@@ -39,7 +39,7 @@ export default function FeaturedProduct() {
 		<main className="flex-grow">
 			<section className="py-3 bg-gray-100">
 				<div className="container mx-auto px-4">
-					<h2 className="text-lg font-semibold text-left mb-3 text-primary">
+					<h2 className="text-xl font-bold text-left mb-3 text-primary">
 						Featured Products
 					</h2>
 					<Carousel
