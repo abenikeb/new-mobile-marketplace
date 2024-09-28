@@ -21,53 +21,52 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import AllProducts from "@components/Home/Products/allProducts";
 
-const popularProducts = [
+const trendingProducts = [
 	{
-		id: 13,
-		name: "Wireless Charging Pad",
-		price: 39.99,
+		id: 9,
+		name: "Foldable Phone",
+		price: 1299.99,
 		image: "/placeholder.svg?height=200&width=200",
-		category: "Accessories",
+		category: "Smartphones",
 	},
 	{
-		id: 14,
-		name: "Bluetooth Speaker",
-		price: 79.99,
+		id: 10,
+		name: "Gaming Laptop",
+		price: 1799.99,
 		image: "/placeholder.svg?height=200&width=200",
-		category: "Audio",
+		category: "Laptops",
 	},
 	{
-		id: 15,
-		name: "Fitness Tracker",
-		price: 99.99,
+		id: 11,
+		name: "Smart Home Hub",
+		price: 129.99,
 		image: "/placeholder.svg?height=200&width=200",
-		category: "Wearables",
+		category: "Smart Home",
 	},
 	{
-		id: 16,
-		name: "Portable SSD",
-		price: 149.99,
+		id: 12,
+		name: "Drone with 4K Camera",
+		price: 799.99,
 		image: "/placeholder.svg?height=200&width=200",
-		category: "Storage",
+		category: "Cameras",
 	},
 ];
-const MostPopular = () => {
+const TrendingProduct = () => {
 	return (
-		<section className="py-12">
+		<section className="py-12 bg-muted">
 			<div className="container mx-auto px-4">
 				<div className="flex justify-between items-center mb-8">
-					<h2 className="text-3xl font-bold">Most Popular</h2>
+					<h2 className="text-3xl font-bold">Trending Products</h2>
 					<Button variant="outline" asChild>
-						<Link href="/popular">
-							See All Popular
+						<Link href="/trending">
+							See All Trending
 							<ChevronRight className="ml-2 h-4 w-4" />
 						</Link>
 					</Button>
 				</div>
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-					{popularProducts.map((product) => (
+					{trendingProducts.map((product) => (
 						<Card key={product.id}>
 							<CardContent className="flex flex-col items-center p-4">
 								<Image
@@ -96,4 +95,4 @@ const MostPopular = () => {
 	);
 };
 
-export default MostPopular;
+export default TrendingProduct;
