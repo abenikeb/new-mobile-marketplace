@@ -95,7 +95,7 @@ const Header = () => {
 					))}
 				</nav>
 				<div className="flex items-center space-x-4 mt-2 md:mt-0 md:ml-auto w-full md:w-auto">
-					<form onSubmit={handleSearch} className="flex-1 md:flex-none">
+					{/* <form onSubmit={handleSearch} className="flex-1 md:flex-none">
 						<div className="relative">
 							<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
 							<Input
@@ -106,7 +106,7 @@ const Header = () => {
 								onChange={(e) => setSearchQuery(e.target.value)}
 							/>
 						</div>
-					</form>
+					</form> */}
 					<Button variant="ghost" size="icon" className="hidden md:flex">
 						<User className="h-5 w-5" />
 						<span className="sr-only">User account</span>
