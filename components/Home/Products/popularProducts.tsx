@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 
 const featuredProducts = [
 	{
@@ -65,6 +67,12 @@ const featuredProducts = [
 ];
 
 const PopularProducts = () => {
+	const router = useRouter();
+
+	const handleRoute = () => {
+		router.push("/product/1");
+	};
+
 	return (
 		<section className="py-4">
 			<div className="container mx-auto px-4">
@@ -96,8 +104,11 @@ const PopularProducts = () => {
 									<p className="text-sm text-muted-foreground mb-2">
 										${product.price.toFixed(2)}
 									</p>
-									<Button size="sm" className="w-full">
-										Add to Cart
+									<Button
+										size="sm"
+										className="w-full bg-gray-600"
+										onClick={handleRoute}>
+										Buy Now
 									</Button>
 								</CardContent>
 							</Card>

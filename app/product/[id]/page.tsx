@@ -54,7 +54,7 @@ export default function ProductPostPage() {
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-8 my-8">
+		<div className="container mx-auto px-4 py-6">
 			<header className="flex justify-between items-center mb-8">
 				<Button variant="ghost" size="icon" asChild>
 					<Link href="/">

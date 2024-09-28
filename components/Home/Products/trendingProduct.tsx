@@ -80,13 +80,10 @@ const TrendingProduct = () => {
 									<h3 className="font-semibold text-sm mb-1 text-center">
 										{product.name}
 									</h3>
-									<Badge className="mb-1">{product.category}</Badge>
+									<Badge className="mb-1 bg-gray-700">{product.category}</Badge>
 									<p className="text-sm text-muted-foreground mb-2">
-										${product.price.toFixed(2)}
+										{product.price.toFixed(2)} Birr
 									</p>
-									<Button size="sm" className="w-full">
-										Add to Cart
-									</Button>
 								</CardContent>
 							</Card>
 						))}

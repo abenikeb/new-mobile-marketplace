@@ -19,7 +19,7 @@ const Hero = () => {
 			<section className="py-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white">
 				<div className="container mx-auto px-4 text-center">
 					<h1 className="text-4xl font-extrabold mb-4">
-						Welcome to <span className="text-yellow-300">TechMarket</span>
+						Welcome to <span className="text-orange-300">TechMarket</span>
 					</h1>
 					<p className="font-light mb-10 max-w-xl mx-auto">
 						Discover the latest and greatest in electronics, gadgets, and more.
@@ -40,7 +40,7 @@ const Hero = () => {
 							/>
 							<Button
 								type="submit"
-								className="absolute right-0 top-1/2 transform -translate-y-1/2 px-8 py-3 bg-yellow-400 text-indigo-700 rounded-full hover:bg-yellow-500 transition-all duration-300">
+								className="absolute right-0 top-1/2 transform -translate-y-1/2 px-8 py-3 bg-orange-300 text-indigo-800 rounded-full hover:bg-yellow-500 transition-all duration-300">
 								Search
 							</Button>
 						</div>

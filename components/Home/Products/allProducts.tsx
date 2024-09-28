@@ -56,11 +56,11 @@ const AllProducts = () => {
 								/>
 								<div className="flex-1 text-center sm:text-left">
 									<h3 className="font-semibold text-lg mb-1">{product.name}</h3>
-									<Badge className="mb-2">{product.category}</Badge>
+									<Badge className="mb-2 bg-gray-700">{product.category}</Badge>
 									<p className="text-muted-foreground mb-4">
 										${product.price.toFixed(2)}
 									</p>
-									<Button className="w-full sm:w-auto">Add to Cart</Button>
+									{/* <Button className="w-full sm:w-auto">Add to Cart</Button> */}
 								</div>
 							</CardContent>
 						</Card>
