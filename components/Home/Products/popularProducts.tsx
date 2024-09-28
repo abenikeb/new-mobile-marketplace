@@ -66,9 +66,9 @@ const featuredProducts = [
 
 const PopularProducts = () => {
 	return (
-		<section className="py-6">
+		<section className="py-4">
 			<div className="container mx-auto px-4">
-				<div className="flex justify-between items-center mb-6">
+				<div className="flex justify-between items-center mb-4">
 					<h2 className="text-xl font-bold">Featured Products</h2>
 					<Button variant="outline" asChild>
 						<Link href="/products">
