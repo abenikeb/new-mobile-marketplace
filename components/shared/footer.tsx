@@ -7,7 +7,7 @@ const Footer = () => {
 	return (
 		<div>
 			{" "}
-			<nav className="bg-background border-t flex justify-around py-2 fixed bottom-0 w-full">
+			<nav className="bg-background border-t flex justify-between py-2 fixed bottom-0 w-full px-2">
 				<Link
 					href="/"
 					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
@@ -30,7 +30,7 @@ const Footer = () => {
 					<span className="text-xs">Post</span>
 				</Link>
 				<Link
-					href="/categories"
+					href="/messagesPage"
 					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
 					prefetch={false}>
 					<MessageCircle className="w-6 h-6" />
