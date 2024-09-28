@@ -18,14 +18,15 @@ export default function ElectronicsHomePage() {
 				<Hero />
 				{/* Featured Products */}
 				<PopularProducts />
+				{/* Shop by Category */}
+				<Category />
 				{/* Trending Products */}
 				<TrendingProduct />
 				{/* Most Popular */}
-				<MostPopular />
+				{/* <MostPopular /> */}
 				{/* All Products */}
 				<AllProducts />
-				{/* Shop by Category */}
-				<Category />
+
 				{/* >Stay Updated */}
 				<Hero2 />
 			</main>

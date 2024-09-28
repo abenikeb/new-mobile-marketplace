@@ -35,9 +35,9 @@ const Category = () => {
 	return (
 		<div>
 			{" "}
-			<section className="py-12">
+			<section className="py-6 bg-muted">
 				<div className="container mx-auto px-4">
-					<h2 className="text-3xl font-bold mb-8 text-navy-700">
+					<h2 className="text-xl font-bold mb-8 text-navy-700">
 						Shop by Category
 					</h2>
 					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">

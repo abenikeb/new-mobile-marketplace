@@ -10,65 +10,66 @@ const featuredProducts = [
 		id: 1,
 		name: "Ultra-Slim Laptop",
 		price: 999.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1.jpg?height=200&width=200",
 		category: "Laptops",
 	},
 	{
 		id: 2,
 		name: "5G Smartphone",
 		price: 799.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product2.jpg?height=200&width=200",
 		category: "Smartphones",
 	},
 	{
 		id: 3,
 		name: "Noise-Cancelling Headphones",
 		price: 299.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product3.jpg?height=200&width=200",
 		category: "Audio",
 	},
 	{
 		id: 4,
 		name: "4K OLED TV",
 		price: 1499.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1.jpg?height=200&width=200",
 		category: "TVs",
 	},
 	{
 		id: 5,
 		name: "Mirrorless Camera",
 		price: 1299.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1.jpg?height=200&width=200",
 		category: "Cameras",
 	},
 	{
 		id: 6,
 		name: "Smartwatch",
 		price: 249.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1?height=200&width=200",
 		category: "Wearables",
 	},
 	{
 		id: 7,
 		name: "Gaming Console",
 		price: 499.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1?height=200&width=200",
 		category: "Gaming",
 	},
 	{
 		id: 8,
 		name: "Wireless Earbuds",
 		price: 159.99,
-		image: "/placeholder.svg?height=200&width=200",
+		image: "/assets/images/product1?height=200&width=200",
 		category: "Audio",
 	},
 ];
+
 const PopularProducts = () => {
 	return (
-		<section className="py-12">
+		<section className="py-6">
 			<div className="container mx-auto px-4">
-				<div className="flex justify-between items-center mb-8">
-					<h2 className="text-3xl font-bold">Featured Products</h2>
+				<div className="flex justify-between items-center mb-6">
+					<h2 className="text-xl font-bold">Featured Products</h2>
 					<Button variant="outline" asChild>
 						<Link href="/products">
 							See More

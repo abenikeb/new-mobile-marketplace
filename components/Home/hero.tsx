@@ -16,12 +16,12 @@ const Hero = () => {
 
 	return (
 		<div>
-			<section className="py-16 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white">
+			<section className="py-10 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white">
 				<div className="container mx-auto px-4 text-center">
-					<h1 className="text-5xl font-extrabold mb-4">
+					<h1 className="text-4xl font-extrabold mb-4">
 						Welcome to <span className="text-yellow-300">TechMarket</span>
 					</h1>
-					<p className="text-xl font-light mb-10 max-w-xl mx-auto">
+					<p className="text-lg font-light mb-10 max-w-xl mx-auto">
 						Discover the latest and greatest in electronics, gadgets, and more.
 					</p>
 
