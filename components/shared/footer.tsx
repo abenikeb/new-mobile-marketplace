@@ -36,7 +36,6 @@ const Footer = () => {
 					<MessageCircle className="w-6 h-6" />
 					<span className="text-xs">Messages</span>
 				</Link>
-
 				<Link
 					href="/profile"
 					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"

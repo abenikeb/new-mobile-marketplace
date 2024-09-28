@@ -24,7 +24,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-// import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 const categories = [
 	"Electronics",
@@ -78,11 +78,11 @@ export default function Post() {
 		// Here you would typically send the form data to your backend
 		console.log(values);
 		console.log(images);
-		// toast({
-		// 	title: "Product Posted!",
-		// 	description:
-		// 		"Your product has been successfully posted to the marketplace.",
-		// });
+		toast({
+			title: "Product Posted!",
+			description:
+				"Your product has been successfully posted to the marketplace.",
+		});
 	}
 
 	const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
