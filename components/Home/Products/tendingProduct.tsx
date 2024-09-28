@@ -33,7 +33,7 @@ const products = [
 ];
 
 const ProductCard = ({ product }: any) => (
-	<Card className="overflow-hidden w-36 flex-shrink-0 transition-transform hover:scale-105">
+	<Card className="overflow-hidden w-32 flex-shrink-0 transition-transform hover:scale-105">
 		<CardContent className="p-0">
 			<img
 				src={product.image}
@@ -57,10 +57,19 @@ const ProductCard = ({ product }: any) => (
 	</Card>
 );
 
-const ProductList = () => {
+const TrendingProduct = () => {
 	return (
 		<div>
-			<div className="grid grid-cols-2 gap-2 p-3">
+			<div className="px-4 py-1 flex items-center justify-between sm:px-6">
+				<h2 className="text-lg font-semibold">Trending Products</h2>
+				<Link
+					href="#"
+					className="text-primary underline underline-offset-4"
+					prefetch={false}>
+					See all
+				</Link>
+			</div>
+			<div className="flex gap-2 overflow-x-auto p-3">
 				{products.map((product, index) => (
 					<ProductCard key={product.id} product={product} />
 				))}
@@ -69,4 +78,4 @@ const ProductList = () => {
 	);
 };
 
-export default ProductList;
+export default TrendingProduct;

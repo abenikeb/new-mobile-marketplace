@@ -43,13 +43,13 @@ export default function FeaturedProduct() {
 						Featured Products
 					</h2>
 					<Carousel
-						className="mx-auto relative"
+						className="mx-auto relative overflow-hidden"
 						onSelect={(index: any) => setCurrentSlide(index)}>
-						<CarouselContent className="flex gap-6">
+						<CarouselContent className="flex gap-4 overflow-visible">
 							{featuredProducts.map((product, index) => (
 								<CarouselItem
 									key={product.id}
-									className="min-w-[70%] md:min-w-[45%] transition-transform transform hover:scale-105">
+									className="min-w-[85%] md:min-w-[48%] transition-transform transform hover:scale-105">
 									<Card className="shadow-lg rounded-lg overflow-hidden">
 										<CardContent className="flex flex-row items-center p-3 bg-white h-[17vh]">
 											<Image
@@ -72,19 +72,7 @@ export default function FeaturedProduct() {
 								</CarouselItem>
 							))}
 						</CarouselContent>
-						{/* <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-md" />
-						<CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-md" /> */}
 					</Carousel>
-					<div className="flex justify-center mt-6 space-x-2">
-						{featuredProducts.map((_, index) => (
-							<div
-								key={index}
-								className={`h-3 w-3 rounded-full ${
-									currentSlide === index ? "bg-primary" : "bg-gray-400"
-								}`}
-							/>
-						))}
-					</div>
 				</div>
 			</section>
 		</main>
