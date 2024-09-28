@@ -1,10 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -38,6 +34,7 @@ const allProducts = [
 		category: "Components",
 	},
 ];
+
 const AllProducts = () => {
 	return (
 		<section className="py-2 bg-muted">

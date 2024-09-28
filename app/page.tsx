@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Laptop } from "lucide-react";
 import AllProducts from "@components/Home/Products/allProducts";
-import MostPopular from "@components/Home/Products/mostPopular";
 import TrendingProduct from "@components/Home/Products/trendingProduct";
 import Category from "@components/Home/Products/category";
 import Header from "@components/Home/header";

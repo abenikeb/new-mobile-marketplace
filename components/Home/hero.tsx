@@ -16,8 +16,23 @@ const Hero = () => {
 
 	return (
 		<div>
-			<section className="py-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white">
-				<div className="container mx-auto px-4 text-center">
+			{/* <section className="py-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white"> */}
+			<section className="relative py-8 bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-700 text-white overflow-hidden">
+				{/* Background SVG pattern */}
+				<div className="absolute -bottom-40 inset-0 pointer-events-none">
+					<svg
+						className="w-full h-full"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 800 400"
+						fill="none">
+						<path
+							d="M0 200 Q150 50 400 200 T800 200 V400 H0 Z"
+							fill="rgba(255, 255, 255, 0.1)"
+						/>
+					</svg>
+				</div>
+
+				<div className="container relative mx-auto px-4 text-center">
 					<h1 className="text-4xl font-extrabold mb-4">
 						Welcome to <span className="text-orange-300">TechMarket</span>
 					</h1>
@@ -28,7 +43,7 @@ const Hero = () => {
 					{/* Search Bar */}
 					<form
 						onSubmit={handleSearch}
-						className="md:w-2/3 lg:w-1/2 mx-auto mb-8 relative">
+						className="md:w-2/3 lg:w-1/2 mx-auto mb-8 relative z-10">
 						<div className="relative">
 							<Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-500" />
 							<Input
@@ -50,7 +65,7 @@ const Hero = () => {
 					<Button
 						size="lg"
 						variant="secondary"
-						className="bg-white text-indigo-700 font-semibold py-3 px-6 rounded-full hover:bg-yellow-500 hover:text-white transition-all duration-300"
+						className="bg-white text-indigo-700 font-semibold py-3 px-6 rounded-full hover:bg-yellow-500 hover:text-white transition-all duration-300 z-10 relative"
 						asChild>
 						<Link href="/products">
 							Explore All Products
