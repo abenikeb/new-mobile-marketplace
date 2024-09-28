@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 const products = [
 	{
@@ -32,8 +34,10 @@ const products = [
 	},
 ];
 
-const ProductCard = ({ product }: any) => (
-	<Card className="overflow-hidden w-[40%] flex-shrink-0 transition-transform hover:scale-105">
+const ProductCard = ({ product, handleClick }: any) => (
+	<Card
+		className="overflow-hidden w-[40%] flex-shrink-0 transition-transform hover:scale-105"
+		onClick={() => handleClick()}>
 		<CardContent className="p-0">
 			<img
 				src={product.image}
@@ -58,20 +62,25 @@ const ProductCard = ({ product }: any) => (
 );
 
 const TrendingProduct = () => {
+	const router = useRouter();
+	const onClickAction = () => {
+		router.push("/product/1");
+	};
 	return (
 		<div>
 			<div className="px-4 py-1 flex items-center justify-between sm:px-6">
 				<h2 className="text-xl font-bold">Trending Products</h2>
-				<Link
-					href="#"
-					className="text-primary underline underline-offset-4"
-					prefetch={false}>
+				<Link href="#" className="text-primary" prefetch={false}>
 					See all
 				</Link>
 			</div>
 			<div className="flex gap-2 overflow-x-auto p-3">
 				{products.map((product, index) => (
-					<ProductCard key={product.id} product={product} />
+					<ProductCard
+						key={product.id}
+						product={product}
+						handleClick={onClickAction}
+					/>
 				))}
 			</div>
 		</div>

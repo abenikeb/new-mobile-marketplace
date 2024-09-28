@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Raleway as FontSans } from "next/font/google"; // Import Raleway instead of Inter
+import { Raleway as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import Footer from "@components/shared/footer";
 import Header from "@components/Home/header";
 
-// Configure Raleway font
 const fontSans = FontSans({
 	subsets: ["latin"],
 	variable: "--font-sans",
-	weight: ["400", "500", "600", "700"], // You can choose the weights you want to use
+	weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
