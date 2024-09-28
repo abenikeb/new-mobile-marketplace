@@ -3,42 +3,54 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShoppingCart, Heart, Share2, ArrowLeft } from "lucide-react";
+import {
+	Heart,
+	MessageCircle,
+	Share2,
+	ChevronLeft,
+	ChevronRight,
+	Star,
+	ArrowLeft,
+	ShoppingCart,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function ProductDetail() {
-	const [quantity, setQuantity] = useState(1);
+export default function ProductPostPage() {
+	const [currentImage, setCurrentImage] = useState(0);
 
 	const product = {
-		name: "Premium Wireless Headphones",
+		name: "Vintage Leather Armchair",
 		price: 299.99,
-		rating: 4.5,
-		reviews: 128,
 		description:
-			"Experience crystal-clear audio with our premium wireless headphones. Featuring advanced noise-cancellation technology and long-lasting battery life, these headphones are perfect for music enthusiasts and professionals alike.",
-		features: [
-			"Active Noise Cancellation",
-			"40-hour battery life",
-			"Bluetooth 5.0 connectivity",
-			"Comfortable over-ear design",
-			"Built-in microphone for calls",
-		],
-		specs: {
-			"Driver Size": "40mm",
-			"Frequency Response": "20Hz - 20kHz",
-			"Impedance": "32 Ohm",
-			"Weight": "250g",
-		},
-		colors: ["Black", "Silver", "Blue"],
+			"Beautiful vintage leather armchair in excellent condition. Perfect for adding a touch of classic elegance to any room.",
+		condition: "Used - Like New",
+		category: "Furniture",
+		location: "New York, NY",
 		images: [
-			"/assets/images/product1.jpg?height=400&width=400",
-			"/assets/images/product1.jpg?height=400&width=400",
-			"/assets/images/product1.jpg?height=400&width=400",
+			"/assets/images/product1.jpg?height=400&width=600",
+			"/assets/images/product1.jpg?height=400&width=600",
+			"/assets/images/product1.jpg?height=400&width=600",
 		],
+		seller: {
+			name: "Jane Smith",
+			rating: 4.8,
+			totalSales: 52,
+			avatar: "/placeholder.svg?height=40&width=40",
+		},
+	};
+
+	const nextImage = () => {
+		setCurrentImage((prev) => (prev + 1) % product.images.length);
+	};
+
+	const prevImage = () => {
+		setCurrentImage(
+			(prev) => (prev - 1 + product.images.length) % product.images.length
+		);
 	};
 
 	return (
@@ -56,119 +68,136 @@ export default function ProductDetail() {
 					<span className="sr-only">View cart</span>
 				</Button>
 			</header>
-			<div className="grid md:grid-cols-2 gap-8">
+			<div className="grid gap-8 md:grid-cols-2">
 				<div className="space-y-4">
-					<div className="relative aspect-square">
+					<div className="relative aspect-video">
 						<Image
-							src={product.images[0]}
-							alt={product.name}
+							src={product.images[currentImage]}
+							alt={`${product.name} - Image ${currentImage + 1}`}
 							layout="fill"
 							objectFit="cover"
 							className="rounded-lg"
 						/>
+						<Button
+							variant="outline"
+							size="icon"
+							className="absolute left-2 top-1/2 -translate-y-1/2"
+							onClick={prevImage}>
+							<ChevronLeft className="h-4 w-4" />
+						</Button>
+						<Button
+							variant="outline"
+							size="icon"
+							className="absolute right-2 top-1/2 -translate-y-1/2"
+							onClick={nextImage}>
+							<ChevronRight className="h-4 w-4" />
+						</Button>
 					</div>
-					<div className="flex space-x-4">
-						{product.images.slice(1).map((image, index) => (
-							<div key={index} className="relative w-20 h-20">
-								<Image
-									src={image}
-									alt={`${product.name} - View ${index + 2}`}
-									layout="fill"
-									objectFit="cover"
-									className="rounded-md"
-								/>
-							</div>
+					<div className="flex justify-center space-x-2">
+						{product.images.map((_, index) => (
+							<Button
+								key={index}
+								variant={index === currentImage ? "default" : "outline"}
+								size="icon"
+								onClick={() => setCurrentImage(index)}>
+								{index + 1}
+							</Button>
 						))}
 					</div>
 				</div>
 				<div className="space-y-6">
-					<h1 className="text-3xl font-bold">{product.name}</h1>
-					<div className="flex items-center space-x-2">
-						<div className="flex">
-							{[...Array(5)].map((_, i) => (
-								<Star
-									key={i}
-									className={`w-5 h-5 ${
-										i < Math.floor(product.rating)
-											? "text-yellow-400 fill-current"
-											: "text-gray-300"
-									}`}
-								/>
-							))}
-						</div>
-						<span className="text-sm text-muted-foreground">
-							{product.rating} ({product.reviews} reviews)
-						</span>
+					<div>
+						<h1 className="text-3xl font-bold">{product.name}</h1>
+						<p className="text-2xl font-semibold mt-2">
+							${product.price.toFixed(2)}
+						</p>
 					</div>
-					<p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
+					<div className="flex space-x-2">
+						<Badge>{product.condition}</Badge>
+						<Badge variant="outline">{product.category}</Badge>
+					</div>
 					<p className="text-muted-foreground">{product.description}</p>
-					<div className="space-y-4">
-						<div>
-							<Label htmlFor="color">Color</Label>
-							<RadioGroup id="color" className="flex space-x-2 mt-2">
-								{product.colors.map((color) => (
-									<div key={color}>
-										<RadioGroupItem
-											value={color}
-											id={`color-${color}`}
-											className="peer sr-only"
-										/>
-										<Label
-											htmlFor={`color-${color}`}
-											className="flex items-center justify-center rounded-full w-8 h-8 bg-primary text-primary-foreground peer-data-[state=checked]:ring-2 ring-primary">
-											{color[0]}
-										</Label>
+					<div className="flex items-center space-x-4">
+						<Button className="flex-1">Buy Now</Button>
+						<Button variant="outline" size="icon">
+							<Heart className="h-4 w-4" />
+						</Button>
+						<Button variant="outline" size="icon">
+							<Share2 className="h-4 w-4" />
+						</Button>
+					</div>
+					<Card>
+						<CardContent className="p-4">
+							<div className="flex items-center space-x-4">
+								<Avatar>
+									<AvatarImage
+										src={product.seller.avatar}
+										alt={product.seller.name}
+									/>
+									<AvatarFallback>{product.seller.name[0]}</AvatarFallback>
+								</Avatar>
+								<div>
+									<p className="font-medium">{product.seller.name}</p>
+									<div className="flex items-center">
+										<Star className="h-4 w-4 text-yellow-400 fill-current" />
+										<span className="ml-1 text-sm">
+											{product.seller.rating} • {product.seller.totalSales}{" "}
+											sales
+										</span>
 									</div>
-								))}
-							</RadioGroup>
-						</div>
-						<div className="flex items-center space-x-4">
-							<Label htmlFor="quantity">Quantity</Label>
-							<Input
-								type="number"
-								id="quantity"
-								className="w-20"
-								min={1}
-								value={quantity}
-								onChange={(e) => setQuantity(parseInt(e.target.value))}
-							/>
-						</div>
-					</div>
-					<div className="flex space-x-4">
-						<Button className="flex-1">
-							<ShoppingCart className="w-4 h-4 mr-2" />
-							Add to Cart
-						</Button>
-						<Button variant="outline" size="icon">
-							<Heart className="w-4 h-4" />
-						</Button>
-						<Button variant="outline" size="icon">
-							<Share2 className="w-4 h-4" />
-						</Button>
-					</div>
+								</div>
+							</div>
+							<Button variant="outline" className="w-full mt-4">
+								<MessageCircle className="mr-2 h-4 w-4" />
+								Contact Seller
+							</Button>
+						</CardContent>
+					</Card>
+					<p className="text-sm text-muted-foreground">
+						Located in: {product.location}
+					</p>
 				</div>
 			</div>
-			<Tabs defaultValue="features" className="mt-12">
+			<Tabs defaultValue="details" className="mt-8">
 				<TabsList>
-					<TabsTrigger value="features">Features</TabsTrigger>
-					<TabsTrigger value="specs">Specifications</TabsTrigger>
+					<TabsTrigger value="details">Details</TabsTrigger>
+					<TabsTrigger value="shipping">Shipping</TabsTrigger>
+					<TabsTrigger value="seller">Seller</TabsTrigger>
 				</TabsList>
-				<TabsContent value="features" className="mt-4">
-					<ul className="list-disc pl-5 space-y-2">
-						{product.features.map((feature, index) => (
-							<li key={index}>{feature}</li>
-						))}
+				<TabsContent value="details" className="mt-4">
+					<h2 className="text-xl font-semibold mb-2">Product Details</h2>
+					<ul className="list-disc pl-5 space-y-1">
+						<li>Material: Genuine leather</li>
+						<li>Color: Brown</li>
+						<li>Dimensions: 30" W x 35" D x 38" H</li>
+						<li>Weight: Approximately 50 lbs</li>
+						<li>Year of manufacture: Circa 1960s</li>
 					</ul>
 				</TabsContent>
-				<TabsContent value="specs" className="mt-4">
-					<dl className="grid grid-cols-2 gap-4">
-						{Object.entries(product.specs).map(([key, value]) => (
-							<div key={key}>
-								<dt className="font-semibold">{key}</dt>
-								<dd>{value}</dd>
-							</div>
-						))}
-					</dl>
+				<TabsContent value="shipping" className="mt-4">
+					<h2 className="text-xl font-semibold mb-2">Shipping Information</h2>
+					<p>
+						This item is available for local pickup in New York City or can be
+						shipped nationwide.
+					</p>
+					<p className="mt-2">
+						Estimated shipping cost: $50 - $100 depending on location
+					</p>
+					<p className="mt-2">Delivery time: 5-7 business days</p>
+				</TabsContent>
+				<TabsContent value="seller" className="mt-4">
+					<h2 className="text-xl font-semibold mb-2">About the Seller</h2>
+					<p>
+						{product.seller.name} has been a trusted seller on our platform
+						since 2019.
+					</p>
+					<p className="mt-2">
+						Specializes in vintage furniture and home decor.
+					</p>
+					<p className="mt-2">
+						Return policy: 14-day returns accepted for items in original
+						condition.
+					</p>
 				</TabsContent>
 			</Tabs>
 		</div>
