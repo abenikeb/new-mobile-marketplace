@@ -7,7 +7,7 @@ import Category from "@components/Home/Products/category";
 import Header from "@components/Home/header";
 import Hero from "@components/Home/hero";
 import Hero2 from "@components/Home/hero2";
-import FeaturedProduct from "@components/Home/Products/FeaturedProduct";
+import PopularProducts from "@components/Home/Products/popularProducts";
 
 export default function ElectronicsHomePage() {
 	return (
@@ -17,7 +17,7 @@ export default function ElectronicsHomePage() {
 				{/* Welcome to TechMarket */}
 				<Hero />
 				{/* Featured Products */}
-				<FeaturedProduct />
+				<PopularProducts />
 				{/* Trending Products */}
 				<TrendingProduct />
 				{/* Most Popular */}
