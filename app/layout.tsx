@@ -3,6 +3,7 @@ import { Raleway as FontSans } from "next/font/google"; // Import Raleway instea
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import Footer from "@components/shared/footer";
+import Header from "@components/Home/header";
 
 // Configure Raleway font
 const fontSans = FontSans({
@@ -23,6 +24,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<Header />
 			<body
 				className={cn(
 					"min-h-screen bg-background font-sans antialiased",

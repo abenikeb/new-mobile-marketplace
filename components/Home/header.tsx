@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -21,13 +22,17 @@ const Header = () => {
 				<span className="text-lg font-semibold">Biisho</span>
 			</Link>
 			<Sheet>
-				<SheetTrigger asChild>
+				{/* <SheetTrigger asChild>
 					<Button variant="outline" size="icon" className="sm:hidden">
 						<MenuIcon className="w-6 h-6" />
 						<span className="sr-only">Toggle navigation</span>
 					</Button>
-				</SheetTrigger>
-				<SheetContent side="right" className="sm:hidden">
+				</SheetTrigger> */}
+				<Button variant="ghost" size="icon">
+					<Search className="h-5 w-5" />
+					<span className="sr-only">Search</span>
+				</Button>
+				{/* <SheetContent side="right" className="sm:hidden">
 					<nav className="grid gap-4 p-4">
 						<Link
 							href="#"
@@ -58,7 +63,7 @@ const Header = () => {
 							Profile
 						</Link>
 					</nav>
-				</SheetContent>
+				</SheetContent> */}
 			</Sheet>
 			<nav className="hidden sm:flex items-center gap-4">
 				<Link

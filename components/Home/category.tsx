@@ -62,7 +62,7 @@ const categories = [
 
 const Category = () => {
 	return (
-		<div className="py-2 sm:px-4">
+		<div className="py-2 sm:px-4 px-3">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center justify-between w-[100vw]">
 					<h2 className="text-lg font-semibold text-orange-900">Categories</h2>
@@ -74,8 +74,8 @@ const Category = () => {
 					</Link>
 				</div>
 			</div>
-			<ScrollArea className="w-96 whitespace-nowrap">
-				<div className="flex gap-6 py-4">
+			<ScrollArea className="w-full whitespace-nowrap">
+				<div className="flex gap-4 py-4">
 					{categories.map((category, index) => (
 						<Link
 							key={index}
@@ -83,12 +83,10 @@ const Category = () => {
 							className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
 							prefetch={false}>
 							<div
-								className={`${category.bgClass} rounded-full p-4 sm:p-6 flex items-center justify-center`}>
-								{category.icon}
-							</div>
-							<span className="text-sm font-medium text-orange-900">
+								className={`${category.bgClass} rounded-full text-sm px-4 py-1.5 sm:p-6 flex items-center justify-center font-semibold`}>
+								{/* {category.icon} */}
 								{category.name}
-							</span>
+							</div>
 						</Link>
 					))}
 				</div>
