@@ -54,7 +54,7 @@ export default function ElectronicsHomePage() {
 						</nav>
 					</div>
 					<div className="mt-4 text-center text-sm text-muted-foreground">
-						© 2023 TechMarket. All rights reserved.
+						© 2024 TechMarket. All rights reserved.
 					</div>
 				</div>
 			</footer>

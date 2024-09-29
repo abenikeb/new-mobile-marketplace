@@ -19,7 +19,7 @@ const Hero = () => {
 			{/* <section className="py-8 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white"> */}
 			<section className="relative py-8 bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-700 text-white overflow-hidden">
 				{/* Background SVG pattern */}
-				<div className="absolute -bottom-40 inset-0 pointer-events-none">
+				<div className="absolute -bottom-44 inset-0 pointer-events-none">
 					<svg
 						className="w-full h-full"
 						xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ const Hero = () => {
 						variant="secondary"
 						className="bg-white text-indigo-700 font-semibold py-3 px-6 rounded-full hover:bg-yellow-500 hover:text-white transition-all duration-300 z-10 relative"
 						asChild>
-						<Link href="/products">
+						<Link href="/product">
 							Explore All Products
 							<ChevronRight className="ml-2 h-5 w-5" />
 						</Link>

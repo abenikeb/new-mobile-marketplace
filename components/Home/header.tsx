@@ -44,14 +44,14 @@ const Header = () => {
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<div className="container flex flex-col md:flex-row h-auto md:h-16 items-center py-2 md:py-0">
-				<div className="flex items-center w-full md:w-auto justify-between md:justify-start">
+				<div className="flex items-center w-screen md:w-auto justify-between md:justify-start px-2">
 					<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
 						<SheetTrigger asChild>
 							<Button
 								variant="ghost"
 								size="icon"
 								className="md:hidden text-navy-700">
-								<Menu className="h-5 w-5" />
+								<Menu className="h-6 w-6" />
 								<span className="sr-only">Toggle menu</span>
 							</Button>
 						</SheetTrigger>
@@ -79,7 +79,7 @@ const Header = () => {
 						variant="ghost"
 						size="icon"
 						className="md:hidden text-navy-700">
-						<User className="h-5 w-5" />
+						<User className="h-6 w-6" />
 						<span className="sr-only">User account</span>
 					</Button>
 				</div>
@@ -94,24 +94,12 @@ const Header = () => {
 						</Button>
 					))}
 				</nav>
-				<div className="flex items-center space-x-4 mt-2 md:mt-0 md:ml-auto w-full md:w-auto">
-					{/* <form onSubmit={handleSearch} className="flex-1 md:flex-none">
-						<div className="relative">
-							<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-							<Input
-								type="search"
-								placeholder="Search electronics..."
-								className="w-full md:w-[300px] pl-8"
-								value={searchQuery}
-								onChange={(e) => setSearchQuery(e.target.value)}
-							/>
-						</div>
-					</form> */}
+				{/* <div className="flex items-center space-x-4 mt-2 md:mt-0 md:ml-auto w-full md:w-auto">
 					<Button variant="ghost" size="icon" className="hidden md:flex">
 						<User className="h-5 w-5" />
 						<span className="sr-only">User account</span>
 					</Button>
-				</div>
+				</div> */}
 			</div>
 		</header>
 	);

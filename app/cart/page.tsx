@@ -65,7 +65,7 @@ export default function CartPage() {
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-8 my-8">
+		<div className="container mx-auto px-4 py-8">
 			<div className="flex justify-between items-center mb-8">
 				<Button variant="ghost" size="sm" asChild>
 					<Link href="/">
@@ -159,16 +159,16 @@ export default function CartPage() {
 								<div className="space-y-2">
 									<div className="flex justify-between">
 										<span>Subtotal</span>
-										<span>${subtotal.toFixed(2)}</span>
+										<span>{subtotal.toFixed(2)} ETB</span>
 									</div>
 									<div className="flex justify-between">
 										<span>Tax</span>
-										<span>${tax.toFixed(2)}</span>
+										<span>{tax.toFixed(2)} ETB</span>
 									</div>
 									<Separator className="my-2" />
 									<div className="flex justify-between font-semibold">
 										<span>Total</span>
-										<span>${total.toFixed(2)}</span>
+										<span>{total.toFixed(2)} ETB</span>
 									</div>
 								</div>
 								<Button onClick={handleCheckout} className="w-full mt-6">

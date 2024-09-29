@@ -95,18 +95,18 @@ const PopularProducts = () => {
 										alt={product.name}
 										width={150}
 										height={150}
-										className="mb-2 rounded-md"
+										className="mb-1 rounded-md"
 									/>
 									<h3 className="font-semibold text-sm mb-1 text-center">
 										{product.name}
 									</h3>
-									<Badge className="mb-1">{product.category}</Badge>
+									<Badge className="mb-1 bg-gray-600">{product.category}</Badge>
 									<p className="text-sm text-muted-foreground mb-2">
-										${product.price.toFixed(2)}
+										{product.price.toFixed(2)} ETB
 									</p>
 									<Button
 										size="sm"
-										className="w-full bg-gray-600"
+										className="w-full bg-gray-700"
 										onClick={handleRoute}>
 										Buy Now
 									</Button>

@@ -7,10 +7,10 @@ const Footer = () => {
 	return (
 		<div>
 			{" "}
-			<nav className="bg-background border-t flex justify-between py-2 fixed bottom-0 w-full px-2">
+			<nav className="bg-background border-t flex justify-between py-2 fixed bottom-0 w-full px-6">
 				<Link
 					href="/"
-					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
+					className="flex flex-col justify-center items-center gap-1 text-muted-foreground hover:text-foreground"
 					prefetch={false}>
 					<HomeIcon className="w-6 h-6" />
 					<span className="text-xs">Home</span>
@@ -31,7 +31,7 @@ const Footer = () => {
 				</Link>
 				<Link
 					href="/messagesPage"
-					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
+					className="flex flex-col justify-center items-center gap-1 text-muted-foreground hover:text-foreground"
 					prefetch={false}>
 					<MessageCircle className="w-6 h-6" />
 					<span className="text-xs">Messages</span>

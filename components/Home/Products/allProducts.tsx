@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardContents } from "@/components/ui/card";
 
 const allProducts = [
 	{
@@ -43,23 +42,19 @@ const AllProducts = () => {
 				<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
 					{allProducts.map((product) => (
 						<Card key={product.id}>
-							<CardContent className="flex flex-col sm:flex-row items-center p-3">
-								<Image
+							<CardContents className="flex flex-col sm:flex-row items-center">
+								<img
 									src={product.image}
 									alt={product.name}
-									width={100}
-									height={100}
-									className="mb-4 sm:mb-0 sm:mr-4 rounded-md"
+									className="mb-4 sm:mb-0 sm:mr-4 rounded-md object-cover w-[200px]"
 								/>
-								<div className="flex-1 text-center sm:text-left">
+								<div className="flex-1 text-left p-2">
 									<h3 className="font-semibold text-lg mb-1">{product.name}</h3>
-									<Badge className="mb-2 bg-gray-700">{product.category}</Badge>
 									<p className="text-muted-foreground mb-4">
-										${product.price.toFixed(2)}
+										{product.price.toFixed(2)} Birr
 									</p>
-									{/* <Button className="w-full sm:w-auto">Add to Cart</Button> */}
 								</div>
-							</CardContent>
+							</CardContents>
 						</Card>
 					))}
 				</div>
