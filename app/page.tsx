@@ -18,6 +18,14 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Laptop } from "lucide-react";
+import AllProducts from "@components/Home/Products/allProducts";
+import TrendingProduct from "@components/Home/Products/trendingProduct";
+import Category from "@components/Home/Products/category";
+import Header from "@components/Home/header";
+import Hero from "@components/Home/hero";
+import Hero2 from "@components/Home/hero2";
+import PopularProducts from "@components/Home/Products/popularProducts";
 
 export default function Component() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -30,9 +38,9 @@ export default function Component() {
 	};
 
 	const bannerImages = [
-		"/assets/images/banner.jpg?height=400&width=1200&text=Summer+Sale",
+		"/assets/images/banner1.jpg?height=400&width=1200&text=Summer+Sale",
 		"/assets/images/banner2.jpg?height=400&width=1200&text=New+Arrivals",
-		"/assets/images/banner3.jpg?height=400&width=1200&text=Special+Offers",
+		"/assets/images/banner.jpg?height=400&width=1200&text=Special+Offers",
 	];
 
 	useEffect(() => {
@@ -101,19 +109,19 @@ export default function Component() {
 			id: 2,
 			name: "Wireless Keyboard",
 			price: 59.99,
-			image: "/assets/images/product2.jpg?height=200&width=200",
+			image: "/assets/images/product3.jpg?height=200&width=200",
 		},
 		{
 			id: 3,
 			name: "4K Webcam",
 			price: 99.99,
-			image: "/assets/images/product2.jpg?height=200&width=200",
+			image: "/assets/images/product4.jpg?height=200&width=200",
 		},
 		{
 			id: 4,
 			name: "Ergonomic Mouse",
 			price: 49.99,
-			image: "/assets/images/product2.jpg?height=200&width=200",
+			image: "/assets/images/product1.jpg?height=200&width=200",
 		},
 	];
 
@@ -122,7 +130,7 @@ export default function Component() {
 			id: 1,
 			name: "Laptop",
 			price: 999.99,
-			image: "/assets/images/product2.jpg?height=150&width=150",
+			image: "/assets/images/banner3.jpg?height=150&width=150",
 		},
 		{
 			id: 2,
@@ -158,24 +166,24 @@ export default function Component() {
 			id: 7,
 			name: "Wireless Router",
 			price: 89.99,
-			image: "/assets/images/product2.jpg?height=150&width=150",
+			image: "/assets/images/product1.jpg?height=150&width=150",
 		},
 		{
 			id: 8,
 			name: "External Hard Drive",
 			price: 129.99,
-			image: "/assets/images/product2.jpg?height=150&width=150",
+			image: "/assets/images/product4.jpg?height=150&width=150",
 		},
 	];
 
 	return (
 		<div className="min-h-screen bg-gray-100">
 			{/* Header Navigation */}
-			<header className="bg-primary text-white">
+			<header className="bg-[#161e21] sticky top-0 z-50 w-full border-b backdrop-blur text-white">
 				<div className="container mx-auto px-4">
 					<div className="flex items-center justify-between py-4">
 						<Link href="/" className="text-2xl font-bold">
-							BiishoMarket
+							Biisho Market
 						</Link>
 						<nav className="hidden md:flex space-x-4">
 							<Link
@@ -223,14 +231,13 @@ export default function Component() {
 							<Button
 								variant="ghost"
 								size="icon"
-								className="md:hidden hover:text-yellow-300 transition-colors">
+								className="md:hidden hover:text-yellow-300  transition-colors">
 								<Menu className="h-6 w-6" />
 							</Button>
 						</div>
 					</div>
 				</div>
 			</header>
-
 			{/* Hero Section / Promotional Banner */}
 			<section className="relative h-[400px] overflow-hidden">
 				<img
@@ -248,13 +255,16 @@ export default function Component() {
 						</p>
 						<Button
 							size="lg"
-							className="bg-primary text-white hover:bg-primary/90">
-							Shop Now
+							className="bg-cyan-950 text-white font-semibold py-3 px-6 hover:bg-primary/90 transition-colors duration-200"
+							asChild>
+							<Link href="/deals">
+								Shop Today's Deals
+								<ChevronRight className="ml-2 h-5 w-5" />
+							</Link>
 						</Button>
 					</div>
 				</div>
 			</section>
-
 			{/* Search Bar */}
 			<div className="bg-gray-200 py-4">
 				<div className="container mx-auto px-4">
@@ -272,7 +282,6 @@ export default function Component() {
 					</form>
 				</div>
 			</div>
-
 			{/* Top-Rated Products Section */}
 			<section className="py-8 bg-white">
 				<div className="container mx-auto px-4">
@@ -298,7 +307,7 @@ export default function Component() {
 												</span>
 											</div>
 											<p className="text-sm font-bold text-gray-800 mt-1">
-												${product.price.toFixed(2)}
+												{product.price.toFixed(2)} ETB
 											</p>
 										</div>
 									</div>
@@ -324,34 +333,54 @@ export default function Component() {
 					</div>
 				</div>
 			</section>
-
-			{/* New Arrivals Section */}
+			{/* Shop by Category */}
+			<Category />
+			{/* newArrivals */}
 			<section className="py-8 bg-gray-100">
 				<div className="container mx-auto px-4">
 					<h2 className="text-2xl font-bold mb-4">New Arrivals</h2>
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-						{newArrivals.map((product) => (
-							<div
-								key={product.id}
-								className="bg-white rounded-lg shadow-md overflow-hidden">
-								<img
-									src={product.image}
-									alt={product.name}
-									className="w-full h-48 object-cover"
-								/>
-								<div className="p-4">
-									<h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-									<p className="text-xl font-bold text-gray-800">
-										${product.price.toFixed(2)}
-									</p>
-									<Button className="w-full mt-2">Add to Cart</Button>
+					<div className="relative">
+						<div className="flex overflow-x-auto space-x-4 pb-4">
+							{newArrivals.map((product) => (
+								<div key={product.id} className="flex-none w-40">
+									<div className="bg-white rounded-lg shadow-md overflow-hidden">
+										<img
+											src={product.image}
+											alt={product.name}
+											className="w-full h-40 object-cover"
+										/>
+										<div className="p-2">
+											<h3 className="text-sm font-semibold truncate">
+												{product.name}
+											</h3>
+
+											<p className="text-sm font-bold text-gray-800 mt-1">
+												{product.price.toFixed(2)} ETB
+											</p>
+										</div>
+									</div>
 								</div>
-							</div>
-						))}
+							))}
+						</div>
+						<div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+							<Button
+								size="icon"
+								variant="ghost"
+								className="rounded-full bg-white shadow-md">
+								<ChevronLeft className="h-6 w-6" />
+							</Button>
+						</div>
+						<div className="absolute top-1/2 right-0 transform -translate-y-1/2">
+							<Button
+								size="icon"
+								variant="ghost"
+								className="rounded-full bg-white shadow-md">
+								<ChevronRight className="h-6 w-6" />
+							</Button>
+						</div>
 					</div>
 				</div>
 			</section>
-
 			{/* All Products Section */}
 			<section className="py-8 bg-white">
 				<div className="container mx-auto px-4">
@@ -371,7 +400,7 @@ export default function Component() {
 										{product.name}
 									</h3>
 									<p className="text-sm font-bold text-gray-800 mt-1">
-										${product.price.toFixed(2)}
+										{product.price.toFixed(2)} ETB
 									</p>
 									<Button size="sm" className="w-full mt-2">
 										Add to Cart
@@ -382,7 +411,6 @@ export default function Component() {
 					</div>
 				</div>
 			</section>
-
 			{/* Footer */}
 			<footer className="bg-gray-800 text-white py-8">
 				<div className="container mx-auto px-4">
@@ -825,15 +853,6 @@ export default function Component() {
 // 		</div>
 // 	);
 // }
-// import Link from "next/link";
-// import { Laptop } from "lucide-react";
-// import AllProducts from "@components/Home/Products/allProducts";
-// import TrendingProduct from "@components/Home/Products/trendingProduct";
-// import Category from "@components/Home/Products/category";
-// import Header from "@components/Home/header";
-// import Hero from "@components/Home/hero";
-// import Hero2 from "@components/Home/hero2";
-// import PopularProducts from "@components/Home/Products/popularProducts";
 
 // export default function ElectronicsHomePage() {
 // 	return (

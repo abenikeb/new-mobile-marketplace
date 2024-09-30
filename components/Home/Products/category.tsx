@@ -46,7 +46,7 @@ const Category = () => {
 								key={category.name}
 								href={`/category/${category.name.toLowerCase()}`}
 								className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-								<category.icon className="h-12 w-12 mb-2 text-amber-500" />
+								<category.icon className="h-12 w-12 mb-2 text-cyan-500" />
 								<span className="text-sm font-medium text-center text-navy-700">
 									{category.name}
 								</span>
