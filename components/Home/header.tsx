@@ -72,8 +72,9 @@ const Header = () => {
 						</SheetContent>
 					</Sheet>
 					<Link href="/" className="flex items-center space-x-2 text-navy-700">
-						<Laptop className="h-6 w-6 text-amber-500" />
-						<span className="font-bold text-xl">TechMarket</span>
+						<img src="/assets/images/logo.png" className="w-5 h-7" alt="" />
+						{/* <Laptop className="h-6 w-6 text-amber-500" /> */}
+						<span className="font-bold text-xl">BiishoMarket</span>
 					</Link>
 					<Button
 						variant="ghost"

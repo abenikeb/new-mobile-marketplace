@@ -34,7 +34,7 @@ const Hero = () => {
 
 				<div className="container relative mx-auto px-4 text-center">
 					<h1 className="text-4xl font-extrabold mb-4">
-						Welcome to <span className="text-orange-300">TechMarket</span>
+						Welcome to <span className="text-orange-300">BiishoMarket</span>
 					</h1>
 					<p className="font-light mb-10 max-w-xl mx-auto">
 						Discover the latest and greatest in electronics, gadgets, and more.
