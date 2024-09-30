@@ -39,7 +39,7 @@ export default function Component() {
 
 	const bannerImages = [
 		"/assets/images/banner1.jpg?height=400&width=1200&text=Summer+Sale",
-		"/assets/images/banner2.jpg?height=400&width=1200&text=New+Arrivals",
+		"/assets/images/banner3.jpg?height=400&width=1200&text=New+Arrivals",
 		"/assets/images/banner.jpg?height=400&width=1200&text=Special+Offers",
 	];
 
@@ -179,9 +179,9 @@ export default function Component() {
 	return (
 		<div className="min-h-screen bg-gray-100">
 			{/* Header Navigation */}
-			<header className="bg-[#161e21] sticky top-0 z-50 w-full border-b backdrop-blur text-white">
+			<header className="bg-[#0f1516] sticky top-0 z-50 w-full backdrop-blur text-white">
 				<div className="container mx-auto px-4">
-					<div className="flex items-center justify-between py-4">
+					<div className="flex items-center justify-between py-3">
 						<Link href="/" className="text-2xl font-bold">
 							Biisho Market
 						</Link>
