@@ -250,7 +250,7 @@ export default function Component() {
 				</div>
 			</header>
 			{/* Search and category */}
-			<div className="bg-[#232f3f] pb-4 pt-3">
+			<div className="bg-[#232f3f] pb-4 pt-1">
 				<div className="container mx-auto px-4">
 					<form onSubmit={handleSearch} className="flex mb-4">
 						<Input
@@ -266,12 +266,12 @@ export default function Component() {
 							Search
 						</Button>
 					</form>
-					<div className="flex space-x-4 overflow-x-auto pb-2">
+					<div className="flex space-x-3 overflow-x-auto pb-2">
 						{categories.map((category) => (
 							<Link
 								key={category.name}
 								href={`/category/${category.name.toLowerCase()}`}
-								className="flex-shrink-0 bg-white rounded-lg shadow-md p-2 text-center hover:shadow-lg transition-shadow duration-200">
+								className="flex-shrink-0 bg-white rounded-md shadow-md py-2 px-3 text-center hover:shadow-lg transition-shadow duration-200">
 								{/* <div className="text-2xl mb-1">{category.icon}</div> */}
 								<div className="text-xs font-semibold">{category.name}</div>
 							</Link>
@@ -280,7 +280,7 @@ export default function Component() {
 				</div>
 			</div>
 			{/* Hero Section / Promotional Banner */}
-			<section className="relative h-[400px] overflow-hidden">
+			<section className="relative h-[320px] overflow-hidden">
 				<img
 					src={bannerImages[currentBannerIndex]}
 					alt="Promotional Banner"
@@ -291,7 +291,7 @@ export default function Component() {
 						<h1 className="text-4xl md:text-5xl font-bold mb-4">
 							Welcome to BiishoMarket
 						</h1>
-						<p className="text-xl mb-8">
+						<p className="text-lg mb-8">
 							Discover amazing deals on all your favorite products
 						</p>
 						<Button
@@ -326,7 +326,13 @@ export default function Component() {
 			{/* Top-Rated Products Section */}
 			<section className="py-8 bg-white">
 				<div className="container mx-auto px-4">
-					<h2 className="text-2xl font-bold mb-4">Top-Rated Products</h2>
+					<div className="flex flex-row justify-between items-start">
+						<h2 className="text-2xl font-bold mb-4">Top-Rated Products</h2>
+						<Link href="/products" className="flex items-center justify-center">
+							See More
+							<ChevronRight className="ml-2 h-4 w-4" />
+						</Link>
+					</div>
 					<div className="relative">
 						<div className="flex overflow-x-auto space-x-4 pb-4">
 							{topRatedProducts.map((product) => (
