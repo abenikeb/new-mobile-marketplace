@@ -38,8 +38,8 @@ export default function Component() {
 	};
 
 	const bannerImages = [
-		"/assets/images/banner1.jpg?height=400&width=1200&text=Summer+Sale",
-		"/assets/images/banner3.jpg?height=400&width=1200&text=New+Arrivals",
+		"/assets/images/banner.jpg?height=400&width=1200&text=Summer+Sale",
+		"/assets/images/banner.jpg?height=400&width=1200&text=New+Arrivals",
 		"/assets/images/banner.jpg?height=400&width=1200&text=Special+Offers",
 	];
 
@@ -176,10 +176,19 @@ export default function Component() {
 		},
 	];
 
+	const categories = [
+		{ name: "Electronics", icon: "💻" },
+		{ name: "Fashion", icon: "👕" },
+		{ name: "Home & Kitchen", icon: "🏠" },
+		{ name: "Books", icon: "📚" },
+		{ name: "Toys", icon: "🧸" },
+		{ name: "Beauty", icon: "💄" },
+	];
+
 	return (
 		<div className="min-h-screen bg-gray-100">
 			{/* Header Navigation */}
-			<header className="bg-[#0f1516] sticky top-0 z-50 w-full backdrop-blur text-white">
+			<header className="bg-[#142423] sticky top-0 z-50 w-full backdrop-blur text-white">
 				<div className="container mx-auto px-4">
 					<div className="flex items-center justify-between py-3">
 						<Link href="/" className="text-2xl font-bold">
@@ -238,6 +247,36 @@ export default function Component() {
 					</div>
 				</div>
 			</header>
+			{/* Search and category */}
+			<div className="bg-[#142423] py-4">
+				<div className="container mx-auto px-4">
+					<form onSubmit={handleSearch} className="flex mb-4">
+						<Input
+							type="search"
+							placeholder="Search BiishoMarket"
+							className="flex-grow rounded-r-none"
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+						/>
+						<Button
+							type="submit"
+							className="rounded-l-none bg-orange-400 hover:bg-orange-500 text-white">
+							Search
+						</Button>
+					</form>
+					<div className="flex space-x-4 overflow-x-auto pb-2">
+						{categories.map((category) => (
+							<Link
+								key={category.name}
+								href={`/category/${category.name.toLowerCase()}`}
+								className="flex-shrink-0 bg-white rounded-lg shadow-md p-2 text-center hover:shadow-lg transition-shadow duration-200">
+								{/* <div className="text-2xl mb-1">{category.icon}</div> */}
+								<div className="text-xs font-semibold">{category.name}</div>
+							</Link>
+						))}
+					</div>
+				</div>
+			</div>
 			{/* Hero Section / Promotional Banner */}
 			<section className="relative h-[400px] overflow-hidden">
 				<img
@@ -255,7 +294,7 @@ export default function Component() {
 						</p>
 						<Button
 							size="lg"
-							className="bg-cyan-950 text-white font-semibold py-3 px-6 hover:bg-primary/90 transition-colors duration-200"
+							className="bg-orange-400 text-white font-semibold py-3 px-6 hover:bg-primary/90 transition-colors duration-200"
 							asChild>
 							<Link href="/deals">
 								Shop Today's Deals
@@ -266,7 +305,7 @@ export default function Component() {
 				</div>
 			</section>
 			{/* Search Bar */}
-			<div className="bg-gray-200 py-4">
+			{/* <div className="bg-gray-200 py-4">
 				<div className="container mx-auto px-4">
 					<form onSubmit={handleSearch} className="flex">
 						<Input
@@ -281,7 +320,7 @@ export default function Component() {
 						</Button>
 					</form>
 				</div>
-			</div>
+			</div> */}
 			{/* Top-Rated Products Section */}
 			<section className="py-8 bg-white">
 				<div className="container mx-auto px-4">
