@@ -15,12 +15,19 @@ import {
 	Tv,
 	Watch,
 	Gamepad,
+	ShoppingCart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const categories = [
 	{ name: "Laptops", icon: Laptop },
@@ -42,67 +49,97 @@ const Header = () => {
 		console.log("Searching for:", searchQuery);
 	};
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-			<div className="container flex flex-col md:flex-row h-auto md:h-16 items-center py-2 md:py-0">
-				<div className="flex items-center w-screen md:w-auto justify-between md:justify-start px-2">
-					<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-						<SheetTrigger asChild>
-							<Button
+		<>
+			<header className="bg-[#232f3f] sticky top-0 z-50 w-full backdrop-blur text-white">
+				<div className="container mx-auto px-4">
+					<div className="flex items-center justify-between py-2">
+						<div className="flex items-center">
+							{/* <Button
 								variant="ghost"
 								size="icon"
-								className="md:hidden text-navy-700">
-								<Menu className="h-6 w-6" />
-								<span className="sr-only">Toggle menu</span>
-							</Button>
-						</SheetTrigger>
-						<SheetContent
-							side="left"
-							className="w-[300px] sm:w-[400px] bg-amber-50">
-							<nav className="flex flex-col gap-4">
-								{categories.map((category) => (
-									<Link
-										key={category.name}
-										href={`/category/${category.name.toLowerCase()}`}
-										className="flex items-center space-x-2 text-lg text-navy-700 hover:text-amber-600 transition-colors">
-										<category.icon className="h-6 w-6" />
-										<span>{category.name}</span>
-									</Link>
-								))}
-							</nav>
-						</SheetContent>
-					</Sheet>
-					<Link href="/" className="flex items-center space-x-2 text-navy-700">
-						<img src="/assets/images/logo.png" className="w-5 h-7" alt="" />
-						{/* <Laptop className="h-6 w-6 text-amber-500" /> */}
-						<span className="font-bold text-xl">BiishoMarket</span>
-					</Link>
-					<Button
-						variant="ghost"
-						size="icon"
-						className="md:hidden text-navy-700">
-						<User className="h-6 w-6" />
-						<span className="sr-only">User account</span>
-					</Button>
-				</div>
-				<nav className="mx-6 items-center space-x-4 lg:space-x-6 hidden md:flex">
-					{categories.map((category) => (
-						<Button asChild variant="ghost" key={category.name}>
+								className="md:hidden hover:text-yellow-300 transition-colors">
+								<Menu className="h-7 w-7" />
+							</Button> */}
+							<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+								<SheetTrigger asChild>
+									<Button
+										variant="ghost"
+										size="icon"
+										className="md:hidden text-navy-700">
+										<Menu className="h-6 w-6" />
+										<span className="sr-only">Toggle menu</span>
+									</Button>
+								</SheetTrigger>
+								<SheetContent
+									side="left"
+									className="w-[300px] sm:w-[400px] bg-amber-50">
+									<nav className="flex flex-col gap-4">
+										{categories.map((category) => (
+											<Link
+												key={category.name}
+												href={`/category/${category.name.toLowerCase()}`}
+												className="flex items-center space-x-2 text-lg text-navy-700 hover:text-amber-600 transition-colors">
+												<category.icon className="h-6 w-6" />
+												<span>{category.name}</span>
+											</Link>
+										))}
+									</nav>
+								</SheetContent>
+							</Sheet>
+							<img
+								src="/assets/images/logo2.png"
+								alt="Promotional Banner"
+								className="w-[4.5rem] h-8 object-cover"
+							/>
+						</div>
+						<nav className="hidden md:flex space-x-4">
 							<Link
-								href={`/category/${category.name.toLowerCase()}`}
-								className="text-sm font-medium transition-colors">
-								{category.name}
+								href="/deals"
+								className="hover:text-yellow-300 transition-colors">
+								Deals
 							</Link>
-						</Button>
-					))}
-				</nav>
-				{/* <div className="flex items-center space-x-4 mt-2 md:mt-0 md:ml-auto w-full md:w-auto">
-					<Button variant="ghost" size="icon" className="hidden md:flex">
-						<User className="h-5 w-5" />
-						<span className="sr-only">User account</span>
-					</Button>
-				</div> */}
-			</div>
-		</header>
+							<Link
+								href="/electronics"
+								className="hover:text-yellow-300 transition-colors">
+								Electronics
+							</Link>
+							<Link
+								href="/fashion"
+								className="hover:text-yellow-300 transition-colors">
+								Fashion
+							</Link>
+							<Link
+								href="/books"
+								className="hover:text-yellow-300 transition-colors">
+								Books
+							</Link>
+						</nav>
+						<div className="flex items-center space-x-4">
+							<Link
+								href="/cart"
+								className="hover:text-yellow-300 transition-colors">
+								<ShoppingCart className="h-6 w-6" />
+							</Link>
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button
+										variant="ghost"
+										size="icon"
+										className="hover:text-yellow-300 transition-colors">
+										<User className="h-6 w-6" />
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent align="end">
+									<DropdownMenuItem>Profile</DropdownMenuItem>
+									<DropdownMenuItem>Orders</DropdownMenuItem>
+									<DropdownMenuItem>Sign Out</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						</div>
+					</div>
+				</div>
+			</header>
+		</>
 	);
 };
 

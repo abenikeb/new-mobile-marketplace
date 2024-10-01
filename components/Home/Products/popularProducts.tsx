@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -66,6 +66,51 @@ const featuredProducts = [
 	},
 ];
 
+const topRatedProducts = [
+	{
+		id: 1,
+		name: "Wireless Earbuds",
+		price: 79.99,
+		rating: 4.5,
+		image: "/assets/images/product2.jpg?height=100&width=100",
+	},
+	{
+		id: 2,
+		name: "Smart Watch",
+		price: 199.99,
+		rating: 4.7,
+		image: "/assets/images/banner.jpg?height=100&width=100",
+	},
+	{
+		id: 3,
+		name: "Portable Charger",
+		price: 39.99,
+		rating: 4.3,
+		image: "/assets/images/product3.jpg?height=100&width=100",
+	},
+	{
+		id: 4,
+		name: "Bluetooth Speaker",
+		price: 59.99,
+		rating: 4.6,
+		image: "/assets/images/product4.jpg?height=100&width=100",
+	},
+	{
+		id: 5,
+		name: "Noise-Cancelling Headphones",
+		price: 249.99,
+		rating: 4.8,
+		image: "/assets/images/product2.jpg?height=100&width=100",
+	},
+	{
+		id: 6,
+		name: "Fitness Tracker",
+		price: 89.99,
+		rating: 4.4,
+		image: "/assets/images/product2.jpg?height=100&width=100",
+	},
+];
+
 const PopularProducts = () => {
 	const router = useRouter();
 
@@ -74,45 +119,58 @@ const PopularProducts = () => {
 	};
 
 	return (
-		<section className="py-4">
+		<section className="py-8 bg-white">
 			<div className="container mx-auto px-4">
-				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-bold">Featured Products</h2>
-					<Button variant="outline" asChild>
-						<Link href="/products">
-							See More
-							<ChevronRight className="ml-2 h-4 w-4" />
-						</Link>
-					</Button>
+				<div className="flex flex-row justify-between items-start">
+					<h2 className="text-2xl font-bold mb-4">Top-Rated Products</h2>
+					<Link href="/products" className="flex items-center justify-center">
+						See More
+						<ChevronRight className="ml-2 h-4 w-4" />
+					</Link>
 				</div>
 				<div className="relative">
-					<div className="flex overflow-x-auto pb-4 -mx-4 px-4 space-x-4 scrollbar-hide">
-						{featuredProducts.map((product) => (
-							<Card key={product.id} className="flex-shrink-0 w-[200px]">
-								<CardContent className="flex flex-col items-center p-4">
-									<Image
+					<div className="flex overflow-x-auto space-x-4 pb-4">
+						{topRatedProducts.map((product) => (
+							<div key={product.id} className="flex-none w-40">
+								<div className="bg-white rounded-lg shadow-md overflow-hidden">
+									<img
 										src={product.image}
 										alt={product.name}
-										width={150}
-										height={150}
-										className="mb-1 rounded-md"
+										className="w-full h-40 object-cover"
 									/>
-									<h3 className="font-semibold text-sm mb-1 text-center">
-										{product.name}
-									</h3>
-									<Badge className="mb-1 bg-gray-600">{product.category}</Badge>
-									<p className="text-sm text-muted-foreground mb-2">
-										{product.price.toFixed(2)} ETB
-									</p>
-									<Button
-										size="sm"
-										className="w-full bg-gray-700"
-										onClick={handleRoute}>
-										Buy Now
-									</Button>
-								</CardContent>
-							</Card>
+									<div className="p-2">
+										<h3 className="text-sm font-semibold truncate">
+											{product.name}
+										</h3>
+										<div className="flex items-center mt-1">
+											<Star className="h-4 w-4 text-yellow-400 fill-current" />
+											<span className="ml-1 text-xs text-gray-600">
+												{product.rating}
+											</span>
+										</div>
+										<p className="text-sm font-bold text-gray-800 mt-1">
+											{product.price.toFixed(2)} ETB
+										</p>
+									</div>
+								</div>
+							</div>
 						))}
+					</div>
+					<div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+						<Button
+							size="icon"
+							variant="ghost"
+							className="rounded-full bg-white shadow-md">
+							<ChevronLeft className="h-6 w-6" />
+						</Button>
+					</div>
+					<div className="absolute top-1/2 right-0 transform -translate-y-1/2">
+						<Button
+							size="icon"
+							variant="ghost"
+							className="rounded-full bg-white shadow-md">
+							<ChevronRight className="h-6 w-6" />
+						</Button>
 					</div>
 				</div>
 			</div>
