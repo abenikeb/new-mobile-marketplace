@@ -188,12 +188,20 @@ export default function Component() {
 	return (
 		<div className="min-h-screen bg-gray-100">
 			{/* Header Navigation */}
-			<header className="bg-[#142423] sticky top-0 z-50 w-full backdrop-blur text-white">
+			<header className="bg-[#232f3f] sticky top-0 z-50 w-full backdrop-blur text-white">
 				<div className="container mx-auto px-4">
-					<div className="flex items-center justify-between py-3">
-						<Link href="/" className="text-2xl font-bold">
-							Biisho Market
-						</Link>
+					<div className="flex items-center justify-between py-2">
+						<div className="flex items-center space-x-1">
+							<Button
+								variant="ghost"
+								size="icon"
+								className="md:hidden hover:text-yellow-300  transition-colors">
+								<Menu className="h-6 w-6" />
+							</Button>
+							<Link href="/" className="text-2xl font-bold">
+								Biisho Market
+							</Link>
+						</div>
 						<nav className="hidden md:flex space-x-4">
 							<Link
 								href="/deals"
@@ -237,18 +245,12 @@ export default function Component() {
 									<DropdownMenuItem>Sign Out</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="md:hidden hover:text-yellow-300  transition-colors">
-								<Menu className="h-6 w-6" />
-							</Button>
 						</div>
 					</div>
 				</div>
 			</header>
 			{/* Search and category */}
-			<div className="bg-[#142423] py-4">
+			<div className="bg-[#232f3f] pb-4 pt-3">
 				<div className="container mx-auto px-4">
 					<form onSubmit={handleSearch} className="flex mb-4">
 						<Input
@@ -260,7 +262,7 @@ export default function Component() {
 						/>
 						<Button
 							type="submit"
-							className="rounded-l-none bg-orange-400 hover:bg-orange-500 text-white">
+							className="rounded-l-none bg-[#febe66] hover:bg-orange-500 text-white">
 							Search
 						</Button>
 					</form>
@@ -294,7 +296,7 @@ export default function Component() {
 						</p>
 						<Button
 							size="lg"
-							className="bg-orange-400 text-white font-semibold py-3 px-6 hover:bg-primary/90 transition-colors duration-200"
+							className="bg-[#febe66] text-white font-semibold py-3 px-6 hover:bg-primary/90 transition-colors duration-200"
 							asChild>
 							<Link href="/deals">
 								Shop Today's Deals
