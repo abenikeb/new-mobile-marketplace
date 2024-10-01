@@ -198,9 +198,15 @@ export default function Component() {
 								className="md:hidden hover:text-yellow-300  transition-colors">
 								<Menu className="h-6 w-6" />
 							</Button>
-							<Link href="/" className="text-2xl font-bold">
+							<img
+								src="/assets/images/logo2.png"
+								alt="Promotional Banner"
+								className="w-[4.5rem] h-8 object-cover"
+							/>
+
+							{/* <Link href="/" className="text-2xl font-bold">
 								Biisho Market
-							</Link>
+							</Link> */}
 						</div>
 						<nav className="hidden md:flex space-x-4">
 							<Link
