@@ -51,15 +51,9 @@ const Header = () => {
 	return (
 		<>
 			<header className="bg-[#232f3f] sticky top-0 z-50 w-full backdrop-blur text-white">
-				<div className="container mx-auto px-4">
+				<div className="container mx-auto px-2">
 					<div className="flex items-center justify-between py-2">
 						<div className="flex items-center">
-							{/* <Button
-								variant="ghost"
-								size="icon"
-								className="md:hidden hover:text-yellow-300 transition-colors">
-								<Menu className="h-7 w-7" />
-							</Button> */}
 							<Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
 								<SheetTrigger asChild>
 									<Button
@@ -89,7 +83,7 @@ const Header = () => {
 							<img
 								src="/assets/images/logo2.png"
 								alt="Promotional Banner"
-								className="w-[4.5rem] h-8 object-cover"
+								className="w-[4.3rem] h-6 object-cover"
 							/>
 						</div>
 						<nav className="hidden md:flex space-x-4">

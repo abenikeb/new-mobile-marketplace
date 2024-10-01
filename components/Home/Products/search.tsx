@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { MapPin, SearchCheck, SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -40,10 +40,10 @@ const Search = () => {
 						<Button
 							type="submit"
 							className="rounded-l-none bg-[#febe66] hover:bg-orange-500 text-white">
-							Search
+							<SearchIcon className="h-5 w-5 mr-1" />
 						</Button>
 					</form>
-					<ScrollArea className="w-96 whitespace-nowrap">
+					<ScrollArea className="w-[11/12] whitespace-nowrap">
 						<div className="flex space-x-2">
 							{categories.map((category) => (
 								<Link
@@ -57,14 +57,14 @@ const Search = () => {
 						<ScrollBar orientation="horizontal" />
 					</ScrollArea>
 
-					<div className="bg-[#27323e] pt-2 ">
+					{/* <div className="bg-[#27323e] pt-2 ">
 						<div className=" mx-auto px-1">
 							<div className="flex items-center text-sm text-gray-100">
 								<MapPin className="h-4 w-4 mr-1" />
 								<span>Deliver to: Addis Ababa, Ethiopia</span>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
