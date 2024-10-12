@@ -83,7 +83,7 @@ const Header = () => {
 							<img
 								src="/assets/images/logo2.png"
 								alt="Promotional Banner"
-								className="w-[4.3rem] h-6 object-cover"
+								className="w-[4.1rem] h-6 object-cover"
 							/>
 						</div>
 						<nav className="hidden md:flex space-x-4">
