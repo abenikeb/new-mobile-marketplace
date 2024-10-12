@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 import {
 	Select,
 	SelectContent,
@@ -115,6 +116,7 @@ export default function Product() {
 	const [viewMode, setViewMode] = useState("grid");
 	const [isLoading, setIsLoading] = useState(true);
 	const productsPerPage = viewMode === "grid" ? 6 : 5;
+	const router = useRouter();
 
 	useEffect(() => {
 		// Simulate loading delay
@@ -160,6 +162,10 @@ export default function Product() {
 		setCurrentPage(pageNumber);
 	};
 
+	const handleProductClick = () => {
+		router.push("/product/1");
+	};
+
 	useEffect(() => {
 		setCurrentPage(1);
 	}, [
@@ -187,7 +193,9 @@ export default function Product() {
 					} w-full transition-transform duration-300 group-hover:scale-110`}
 				/>
 				<div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-					<Button variant="secondary">View Details</Button>
+					<Button onClick={handleProductClick} variant="secondary">
+						View Details
+					</Button>
 				</div>
 			</div>
 			<CardContent
