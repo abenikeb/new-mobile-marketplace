@@ -182,7 +182,7 @@ export default function Product() {
 			className={`flex ${
 				viewMode === "list" ? "flex-row" : "flex-col"
 			} overflow-hidden group h-full`}>
-			<div className={`relative ${viewMode === "list" ? "w-1/3" : "w-full"}`}>
+			<div className={`relative ${viewMode === "list" ? "w-1/2" : "w-full"}`}>
 				<Image
 					src={product.image}
 					alt={product.name}
@@ -203,22 +203,22 @@ export default function Product() {
 					viewMode === "list" ? "w-2/3" : "w-full"
 				}`}>
 				<div>
-					<h2 className="font-semibold text-lg mb-2 line-clamp-1">
+					<h2 className="font-semibold text-lg mb-1 line-clamp-1">
 						{product.name}
 					</h2>
-					<div className="flex justify-between items-center mb-2">
+					{/* <div className="flex justify-between items-center mb-2">
 						<Badge variant="secondary">{product.category}</Badge>
 						<span className="text-sm text-gray-500">{product.location}</span>
-					</div>
+					</div> */}
 					{viewMode === "list" && (
 						<p className="text-sm text-gray-600 mb-2 line-clamp-2">
 							{product.description}
 						</p>
 					)}
 				</div>
-				<div className="mt-4">
+				<div className="mt-2">
 					<div className="flex items-center justify-between">
-						<p className="text-xl font-bold text-primary">
+						<p className="font-bold text-primary">
 							{product.price.toFixed(2)} ETB
 						</p>
 						<div className="flex items-center">
@@ -266,7 +266,7 @@ export default function Product() {
 	);
 
 	return (
-		<div className="container mx-auto px-4 pt-8 pb-20">
+		<div className="container mx-auto px-4 pt-3 pb-20">
 			<header className="flex flex-row items-center mb-4">
 				<Button variant="ghost" size="icon" asChild>
 					<Link href="/">
@@ -380,7 +380,7 @@ export default function Product() {
 				</div>
 			</div>
 			<div
-				className={`grid gap-6 mb-8 ${
+				className={`grid gap-3 mb-8 ${
 					viewMode === "grid" ? "grid-cols-2 sm:grid-cols-2" : "grid-cols-1"
 				}`}>
 				{isLoading
