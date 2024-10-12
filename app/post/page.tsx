@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
 	Card,
 	CardContent,
@@ -31,6 +30,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useDropzone } from "react-dropzone";
 
 const categories = [
 	{ value: "computers", label: "Computers" },
@@ -61,6 +62,36 @@ const conditions = [
 	{ value: "poor", label: "Poor" },
 ];
 
+const deliveryOptions = [
+	{ id: "pickup", label: "Local Pickup" },
+	{ id: "shipping", label: "Shipping" },
+	{ id: "both", label: "Both Pickup and Shipping" },
+];
+
+const states = [
+	{ value: "AA", label: "Addis Ababa" },
+	{ value: "AD", label: "Adama" },
+	{ value: "HA", label: "Hawasa" },
+];
+
+const cities = {
+	AA: [
+		{ value: "addis-ketema", label: "Addis Ketema" },
+		{ value: "bole", label: "Bole" },
+		{ value: "yeka", label: "Yeka" },
+	],
+	AD: [
+		{ value: "sub-city", label: "Sub City" },
+		{ value: "buffalo", label: "Buffalo" },
+		{ value: "albany", label: "Albany" },
+	],
+	HA: [
+		{ value: "houston", label: "Houston" },
+		{ value: "austin", label: "Austin" },
+		{ value: "dallas", label: "Dallas" },
+	],
+};
+
 const formSchema = z.object({
 	title: z.string().min(2, {
 		message: "Title must be at least 2 characters.",
@@ -74,14 +105,11 @@ const formSchema = z.object({
 	description: z.string().min(10, {
 		message: "Description must be at least 10 characters.",
 	}),
-	location: z.string().min(2, {
-		message: "Location must be at least 2 characters.",
+	state: z.string({
+		required_error: "Please select a state.",
 	}),
-	name: z.string().min(2, {
-		message: "Name must be at least 2 characters.",
-	}),
-	phone: z.string().min(10, {
-		message: "Phone number must be at least 10 characters.",
+	city: z.string({
+		required_error: "Please select a city.",
 	}),
 	brand: z.string().min(2, {
 		message: "Brand must be at least 2 characters.",
@@ -91,6 +119,12 @@ const formSchema = z.object({
 	}),
 	condition: z.string({
 		required_error: "Please select a condition.",
+	}),
+	price: z.number().min(0, {
+		message: "Price must be a positive number.",
+	}),
+	deliveryOptions: z.array(z.string()).refine((value) => value.length > 0, {
+		message: "You must select at least one delivery option.",
 	}),
 	processor: z.string().optional(),
 	ram: z.string().optional(),
@@ -106,23 +140,39 @@ const formSchema = z.object({
 export default function ProductPostForm() {
 	const [category, setCategory] = useState("");
 	const [subCategory, setSubCategory] = useState("");
+	const [selectedState, setSelectedState] = useState("");
+	const [images, setImages] = useState<File[]>([]);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: "",
 			description: "",
-			location: "",
-			name: "",
-			phone: "",
+			state: "",
+			city: "",
 			brand: "",
 			model: "",
+			price: 0,
+			deliveryOptions: [],
 			youtubeLink: "",
 		},
 	});
 
+	const onDrop = useCallback((acceptedFiles: File[]) => {
+		setImages((prevImages) => [...prevImages, ...acceptedFiles]);
+	}, []);
+
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop,
+		accept: {
+			"image/*": [".jpeg", ".jpg", ".png", ".gif"],
+		},
+		multiple: true,
+	});
+
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
+		console.log("Images:", images);
 	}
 
 	return (
@@ -131,40 +181,86 @@ export default function ProductPostForm() {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 					<Card className="p-2">
 						<CardHeader>
-							<CardTitle>Post Your Electronics Product</CardTitle>
-							<CardDescription>
-								Fill in the details about your product
-							</CardDescription>
+							<CardTitle>Post Your Ad</CardTitle>
 						</CardHeader>
 						<CardContent className="space-y-6">
+							<FormField
+								control={form.control}
+								name="title"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Title*</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="Enter product title"
+												{...field}
+												required
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 								<FormField
 									control={form.control}
-									name="title"
+									name="state"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Title</FormLabel>
-											<FormControl>
-												<Input placeholder="Enter product title" {...field} />
-											</FormControl>
+											<FormLabel>State</FormLabel>
+											<Select
+												onValueChange={(value) => {
+													field.onChange(value);
+													setSelectedState(value);
+													form.setValue("city", "");
+												}}>
+												<FormControl>
+													<SelectTrigger>
+														<SelectValue placeholder="Select a state" />
+													</SelectTrigger>
+												</FormControl>
+												<SelectContent>
+													{states.map((state) => (
+														<SelectItem key={state.value} value={state.value}>
+															{state.label}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
 											<FormMessage />
 										</FormItem>
 									)}
 								/>
 
-								<FormField
-									control={form.control}
-									name="location"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Location</FormLabel>
-											<FormControl>
-												<Input placeholder="Enter your location" {...field} />
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
+								{selectedState && (
+									<FormField
+										control={form.control}
+										name="city"
+										render={({ field }) => (
+											<FormItem>
+												<FormLabel>City</FormLabel>
+												<Select onValueChange={field.onChange}>
+													<FormControl>
+														<SelectTrigger>
+															<SelectValue placeholder="Select a city" />
+														</SelectTrigger>
+													</FormControl>
+													<SelectContent>
+														{cities[selectedState as keyof typeof cities].map(
+															(city) => (
+																<SelectItem key={city.value} value={city.value}>
+																	{city.label}
+																</SelectItem>
+															)
+														)}
+													</SelectContent>
+												</Select>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+								)}
 							</div>
 
 							<FormField
@@ -255,7 +351,11 @@ export default function ProductPostForm() {
 
 							<div>
 								<FormLabel>Images</FormLabel>
-								<div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+								<div
+									{...getRootProps()}
+									className={`mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${
+										isDragActive ? "bg-blue-50" : ""
+									}`}>
 									<div className="text-center">
 										<svg
 											className="mx-auto h-12 w-12 text-gray-300"
@@ -273,13 +373,7 @@ export default function ProductPostForm() {
 												htmlFor="file-upload"
 												className="relative cursor-pointer rounded-md bg-white font-semibold text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
 												<span>Upload files</span>
-												<input
-													id="file-upload"
-													name="file-upload"
-													type="file"
-													className="sr-only"
-													multiple
-												/>
+												<input {...getInputProps()} />
 											</label>
 											<p className="pl-1">or drag and drop</p>
 										</div>
@@ -288,6 +382,16 @@ export default function ProductPostForm() {
 										</p>
 									</div>
 								</div>
+								{images.length > 0 && (
+									<div className="mt-4">
+										<p>{images.length} file(s) selected</p>
+										<ul className="list-disc pl-5">
+											{images.map((file, index) => (
+												<li key={index}>{file.name}</li>
+											))}
+										</ul>
+									</div>
+								)}
 							</div>
 
 							{subCategory && (
@@ -324,27 +428,100 @@ export default function ProductPostForm() {
 										control={form.control}
 										name="condition"
 										render={({ field }) => (
-											<FormItem className="space-y-3">
+											<FormItem>
 												<FormLabel>Condition</FormLabel>
-												<FormControl>
-													<RadioGroup
-														onValueChange={field.onChange}
-														defaultValue={field.value}
-														className="flex flex-col space-y-1">
+
+												<Select onValueChange={field.onChange}>
+													<FormControl>
+														<SelectTrigger>
+															<SelectValue placeholder="Select condition" />
+														</SelectTrigger>
+													</FormControl>
+													<SelectContent>
 														{conditions.map((condition) => (
-															<FormItem
-																className="flex items-center space-x-3 space-y-0"
-																key={condition.value}>
-																<FormControl>
-																	<RadioGroupItem value={condition.value} />
-																</FormControl>
-																<FormLabel className="font-normal">
-																	{condition.label}
-																</FormLabel>
-															</FormItem>
+															<SelectItem
+																key={condition.value}
+																value={condition.value}>
+																{condition.label}
+															</SelectItem>
 														))}
-													</RadioGroup>
+													</SelectContent>
+												</Select>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={form.control}
+										name="price"
+										render={({ field }) => (
+											<FormItem>
+												<FormLabel>Price</FormLabel>
+												<FormControl>
+													<Input
+														type="number"
+														placeholder="Enter price"
+														{...field}
+														onChange={(e) =>
+															field.onChange(parseFloat(e.target.value))
+														}
+													/>
 												</FormControl>
+												<FormMessage />
+											</FormItem>
+										)}
+									/>
+
+									<FormField
+										control={form.control}
+										name="deliveryOptions"
+										render={() => (
+											<FormItem>
+												<div className="mb-4">
+													<FormLabel className="text-base">
+														Delivery Options
+													</FormLabel>
+													<FormDescription>
+														Select the available delivery options for your
+														product.
+													</FormDescription>
+												</div>
+												{deliveryOptions.map((item) => (
+													<FormField
+														key={item.id}
+														control={form.control}
+														name="deliveryOptions"
+														render={({ field }) => {
+															return (
+																<FormItem
+																	key={item.id}
+																	className="flex flex-row items-start space-x-3 space-y-0">
+																	<FormControl>
+																		<Checkbox
+																			checked={field.value?.includes(item.id)}
+																			onCheckedChange={(checked) => {
+																				return checked
+																					? field.onChange([
+																							...field.value,
+																							item.id,
+																					  ])
+																					: field.onChange(
+																							field.value?.filter(
+																								(value) => value !== item.id
+																							)
+																					  );
+																			}}
+																		/>
+																	</FormControl>
+																	<FormLabel className="font-normal">
+																		{item.label}
+																	</FormLabel>
+																</FormItem>
+															);
+														}}
+													/>
+												))}
 												<FormMessage />
 											</FormItem>
 										)}
@@ -519,49 +696,9 @@ export default function ProductPostForm() {
 						</CardContent>
 					</Card>
 
-					<Card className="p-6">
-						<CardHeader>
-							<CardTitle>Contact Information</CardTitle>
-							<CardDescription>
-								Please provide your contact details
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-								<FormField
-									control={form.control}
-									name="name"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Your Name</FormLabel>
-											<FormControl>
-												<Input placeholder="Enter your name" {...field} />
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="phone"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Phone Number</FormLabel>
-											<FormControl>
-												<Input
-													placeholder="Enter your phone number"
-													{...field}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							</div>
-						</CardContent>
-					</Card>
-
-					<Button type="submit" className="w-full">
+					<Button
+						type="submit"
+						className="w-full bg-orange-300 hover:bg-orange-400 text-black">
 						Submit Product Listing
 					</Button>
 				</form>
