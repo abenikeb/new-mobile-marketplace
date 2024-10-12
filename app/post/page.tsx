@@ -105,7 +105,7 @@ const formSchema = z.object({
 	description: z.string().min(10, {
 		message: "Description must be at least 10 characters.",
 	}),
-	state: z.string({
+	location: z.string({
 		required_error: "Please select a state.",
 	}),
 	city: z.string({
@@ -148,7 +148,7 @@ export default function ProductPostForm() {
 		defaultValues: {
 			title: "",
 			description: "",
-			state: "",
+			location: "",
 			city: "",
 			brand: "",
 			model: "",
@@ -179,11 +179,13 @@ export default function ProductPostForm() {
 		<div className="max-w-4xl mx-auto p-2 space-y-8">
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-					<Card className="p-2">
+					<Card className="p-0">
 						<CardHeader>
 							<CardTitle>Post Your Ad</CardTitle>
 						</CardHeader>
-						<CardContent className="space-y-6">
+						<hr />
+						<br />
+						<CardContent className="space-y-5">
 							<FormField
 								control={form.control}
 								name="title"
@@ -195,20 +197,89 @@ export default function ProductPostForm() {
 												placeholder="Enter product title"
 												{...field}
 												required
+												autoFocus
 											/>
 										</FormControl>
 										<FormMessage />
 									</FormItem>
 								)}
 							/>
+							{/* category */}
+							<FormField
+								control={form.control}
+								name="category"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Category</FormLabel>
+										<Select
+											onValueChange={(value) => {
+												field.onChange(value);
+												setCategory(value);
+												setSubCategory("");
+												form.setValue("subCategory", "");
+											}}>
+											<FormControl>
+												<SelectTrigger>
+													<SelectValue placeholder="Select a category" />
+												</SelectTrigger>
+											</FormControl>
+											<SelectContent>
+												{categories.map((category) => (
+													<SelectItem
+														key={category.value}
+														value={category.value}>
+														{category.label}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							{category && (
+								<FormField
+									control={form.control}
+									name="subCategory"
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Sub-Category</FormLabel>
+											<Select
+												onValueChange={(value) => {
+													field.onChange(value);
+													setSubCategory(value);
+												}}>
+												<FormControl>
+													<SelectTrigger>
+														<SelectValue placeholder="Select a sub-category" />
+													</SelectTrigger>
+												</FormControl>
+												<SelectContent>
+													{subCategories[
+														category as keyof typeof subCategories
+													].map((subCategory) => (
+														<SelectItem
+															key={subCategory.value}
+															value={subCategory.value}>
+															{subCategory.label}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							)}
 
+							{/* Location */}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 								<FormField
 									control={form.control}
-									name="state"
+									name="location"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>State</FormLabel>
+											<FormLabel>Location*</FormLabel>
 											<Select
 												onValueChange={(value) => {
 													field.onChange(value);
@@ -217,7 +288,7 @@ export default function ProductPostForm() {
 												}}>
 												<FormControl>
 													<SelectTrigger>
-														<SelectValue placeholder="Select a state" />
+														<SelectValue placeholder="Select a location" />
 													</SelectTrigger>
 												</FormControl>
 												<SelectContent>
@@ -262,81 +333,12 @@ export default function ProductPostForm() {
 									/>
 								)}
 							</div>
-
-							<FormField
-								control={form.control}
-								name="category"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Category</FormLabel>
-										<Select
-											onValueChange={(value) => {
-												field.onChange(value);
-												setCategory(value);
-												setSubCategory("");
-												form.setValue("subCategory", "");
-											}}>
-											<FormControl>
-												<SelectTrigger>
-													<SelectValue placeholder="Select a category" />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												{categories.map((category) => (
-													<SelectItem
-														key={category.value}
-														value={category.value}>
-														{category.label}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-
-							{category && (
-								<FormField
-									control={form.control}
-									name="subCategory"
-									render={({ field }) => (
-										<FormItem>
-											<FormLabel>Sub-Category</FormLabel>
-											<Select
-												onValueChange={(value) => {
-													field.onChange(value);
-													setSubCategory(value);
-												}}>
-												<FormControl>
-													<SelectTrigger>
-														<SelectValue placeholder="Select a sub-category" />
-													</SelectTrigger>
-												</FormControl>
-												<SelectContent>
-													{subCategories[
-														category as keyof typeof subCategories
-													].map((subCategory) => (
-														<SelectItem
-															key={subCategory.value}
-															value={subCategory.value}>
-															{subCategory.label}
-														</SelectItem>
-													))}
-												</SelectContent>
-											</Select>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-							)}
-
 							<FormField
 								control={form.control}
 								name="description"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Description</FormLabel>
+										<FormLabel>Description*</FormLabel>
 										<FormControl>
 											<Textarea
 												placeholder="Enter product description"
@@ -349,53 +351,53 @@ export default function ProductPostForm() {
 								)}
 							/>
 
-							<div>
-								<FormLabel>Images</FormLabel>
-								<div
-									{...getRootProps()}
-									className={`mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${
-										isDragActive ? "bg-blue-50" : ""
-									}`}>
-									<div className="text-center">
-										<svg
-											className="mx-auto h-12 w-12 text-gray-300"
-											viewBox="0 0 24 24"
-											fill="currentColor"
-											aria-hidden="true">
-											<path
-												fillRule="evenodd"
-												d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										<div className="mt-4 flex text-sm leading-6 text-gray-600">
-											<label
-												htmlFor="file-upload"
-												className="relative cursor-pointer rounded-md bg-white font-semibold text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
-												<span>Upload files</span>
-												<input {...getInputProps()} />
-											</label>
-											<p className="pl-1">or drag and drop</p>
-										</div>
-										<p className="text-xs leading-5 text-gray-600">
-											PNG, JPG, GIF up to 10MB
-										</p>
-									</div>
-								</div>
-								{images.length > 0 && (
-									<div className="mt-4">
-										<p>{images.length} file(s) selected</p>
-										<ul className="list-disc pl-5">
-											{images.map((file, index) => (
-												<li key={index}>{file.name}</li>
-											))}
-										</ul>
-									</div>
-								)}
-							</div>
-
 							{subCategory && (
 								<>
+									{/* Images */}
+									<div>
+										<FormLabel>Add at least 2 photos</FormLabel>
+										<div
+											{...getRootProps()}
+											className={`mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${
+												isDragActive ? "bg-blue-50" : ""
+											}`}>
+											<div className="text-center">
+												<svg
+													className="mx-auto h-12 w-12 text-gray-300"
+													viewBox="0 0 24 24"
+													fill="currentColor"
+													aria-hidden="true">
+													<path
+														fillRule="evenodd"
+														d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+														clipRule="evenodd"
+													/>
+												</svg>
+												<div className="mt-4 flex text-sm leading-6 text-gray-600">
+													<label
+														htmlFor="file-upload"
+														className="relative cursor-pointer rounded-md bg-white font-semibold text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+														<span>Upload files</span>
+														<input {...getInputProps()} />
+													</label>
+													<p className="pl-1">or drag and drop</p>
+												</div>
+												<p className="text-xs leading-5 text-gray-600">
+													PNG, JPG, GIF up to 10MB
+												</p>
+											</div>
+										</div>
+										{images.length > 0 && (
+											<div className="mt-4">
+												<p>{images.length} file(s) selected</p>
+												<ul className="list-disc pl-5">
+													{images.map((file, index) => (
+														<li key={index}>{file.name}</li>
+													))}
+												</ul>
+											</div>
+										)}
+									</div>
 									<FormField
 										control={form.control}
 										name="brand"
@@ -674,6 +676,7 @@ export default function ProductPostForm() {
 								</>
 							)}
 
+							{/* YOutube Link */}
 							<FormField
 								control={form.control}
 								name="youtubeLink"
@@ -698,7 +701,7 @@ export default function ProductPostForm() {
 
 					<Button
 						type="submit"
-						className="w-full bg-orange-300 hover:bg-orange-400 text-black">
+						className="w-full bg-orange-400 hover:bg-orange-400 text-white h-12">
 						Submit Product Listing
 					</Button>
 				</form>
