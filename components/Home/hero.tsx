@@ -27,7 +27,7 @@ const Hero = () => {
 	}, []);
 
 	return (
-		<section className="relative h-[320px] overflow-hidden">
+		<section className="relative h-[300px] overflow-hidden">
 			<img
 				src={bannerImages[currentBannerIndex]}
 				alt="Promotional Banner"
@@ -36,9 +36,9 @@ const Hero = () => {
 			<div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 				<div className="text-center text-white">
 					<h1 className="text-3xl md:text-5xl font-bold mb-4">
-						Welcome to BiishoMarket
+						Welcome to <span className="block">Biisho Market</span>
 					</h1>
-					<p className="text-lg mb-8">
+					<p className="mb-8">
 						Discover amazing deals on all your favorite products
 					</p>
 					<Button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useDropzone } from "react-dropzone";
+import { Loader2, X } from "lucide-react";
 
 const categories = [
 	{ value: "computers", label: "Computers" },
@@ -142,6 +143,8 @@ export default function ProductPostForm() {
 	const [subCategory, setSubCategory] = useState("");
 	const [selectedState, setSelectedState] = useState("");
 	const [images, setImages] = useState<File[]>([]);
+	const [showLoginModal, setShowLoginModal] = useState(false);
+	// const { data: session, status } = useSession();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -170,13 +173,49 @@ export default function ProductPostForm() {
 		multiple: true,
 	});
 
+	useEffect(() => {
+		if (status === "unauthenticated") {
+			setShowLoginModal(true);
+		}
+	}, [status]);
+
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
 		console.log("Images:", images);
 	}
 
+	if (status === "loading") {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				<Loader2 className="h-8 w-8 animate-spin" />
+			</div>
+		);
+	}
+
 	return (
-		<div className="max-w-4xl mx-auto p-2 space-y-8">
+		<div className="max-w-4xl mx-auto p-2 space-y-8 relative">
+			{showLoginModal && (
+				<div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end justify-center">
+					<div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md h-1/2">
+						<div className="flex justify-between items-center mb-4">
+							<h2 className="text-2xl font-bold">Login Required</h2>
+							<button
+								onClick={() => setShowLoginModal(false)}
+								className="text-gray-500 hover:text-gray-700">
+								<X className="h-6 w-6" />
+							</button>
+						</div>
+						<p className="mb-6">
+							Please log in to access the product post form.
+						</p>
+						<div className="space-y-4">
+							<Button className="w-full bg-orange-300">Login with Phone</Button>
+							<Button className="w-full bg-blue-400">Login with Google</Button>
+						</div>
+					</div>
+				</div>
+			)}
+
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 					<Card className="p-0">
