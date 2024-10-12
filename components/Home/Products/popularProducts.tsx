@@ -119,10 +119,10 @@ const PopularProducts = () => {
 	};
 
 	return (
-		<section className="py-8 bg-white">
+		<section className="py-6 bg-white">
 			<div className="container mx-auto px-4">
 				<div className="flex flex-row justify-between items-start">
-					<h2 className="text-2xl font-bold mb-4">Top-Rated Products</h2>
+					<h2 className="text-xl font-bold mb-4">Top-Rated Products</h2>
 					<Link href="/products" className="flex items-center justify-center">
 						See More
 						<ChevronRight className="ml-2 h-4 w-4" />

@@ -189,7 +189,7 @@ export default function Product() {
 					width={400}
 					height={300}
 					className={`object-cover ${
-						viewMode === "list" ? "h-full" : "h-48"
+						viewMode === "list" ? "h-full" : "h-40"
 					} w-full transition-transform duration-300 group-hover:scale-110`}
 				/>
 				<div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -266,15 +266,15 @@ export default function Product() {
 	);
 
 	return (
-		<div className="container mx-auto px-4 pt-3 pb-20">
-			<header className="flex flex-row items-center mb-4">
+		<div className="container mx-auto px-4 pt-2 pb-20">
+			<header className="flex flex-row items-center mb-2">
 				<Button variant="ghost" size="icon" asChild>
 					<Link href="/">
 						<ArrowLeft className="h-6 w-6" />
 						<span className="sr-only">Back</span>
 					</Link>
 				</Button>
-				<h1 className="text-2xl font-bold ml-2">All Products</h1>
+				<h1 className="text-xl font-bold ml-2">All Products</h1>
 			</header>
 			<div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0 md:space-x-4">
 				<div className="w-full md:w-1/3 relative">
