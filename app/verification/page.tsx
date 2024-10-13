@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
@@ -37,7 +38,7 @@ const formSchema = z.object({
 		}),
 });
 
-export default function VerificationPage() {
+function VerificationPage() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [loading, setLoading] = useState(false);
@@ -88,7 +89,7 @@ export default function VerificationPage() {
 	return (
 		<div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
 			<div className="flex-1 hidden lg:block">
-				<div className="h-full flex items-center justify-center bg-blue-600 bg-opacity-10">
+				<div className="h-full flex items-center justify-center bg-gray-50 bg-opacity-10">
 					<Image
 						src="/images/verify-illustration.svg"
 						alt="Verification Illustration"
@@ -111,7 +112,7 @@ export default function VerificationPage() {
 					<CardContent>
 						<div className="flex justify-center mb-6">
 							<Image
-								src="/images/verify.png"
+								src="/assets/images/verification.png"
 								alt="verification"
 								width={200}
 								height={200}
@@ -141,7 +142,10 @@ export default function VerificationPage() {
 										</FormItem>
 									)}
 								/>
-								<Button type="submit" className="w-full" disabled={loading}>
+								<Button
+									type="submit"
+									className="w-full bg-blue-500"
+									disabled={loading}>
 									{loading ? "Verifying..." : "Verify"}
 								</Button>
 							</form>
@@ -168,5 +172,13 @@ export default function VerificationPage() {
 				</Card>
 			</div>
 		</div>
+	);
+}
+
+export default function PageWrapper() {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<VerificationPage />
+		</Suspense>
 	);
 }
