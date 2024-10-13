@@ -114,7 +114,7 @@ export default function LoginPage() {
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex flex-col items-center space-y-6">
-								<Avatar className="w-32 h-32 border-4 border-[#394b63]">
+								<Avatar className="w-32 h-32 border-4 border-[#60799b]">
 									<AvatarFallback className="bg-[#232f3f] text-white text-4xl">
 										<UserIcon size={64} />
 									</AvatarFallback>

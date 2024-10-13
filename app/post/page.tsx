@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import PhoneInput from "react-phone-input-2";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import {
 	Form,
@@ -35,6 +37,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useDropzone } from "react-dropzone";
 import { Loader2, X } from "lucide-react";
 import { LoadingDots } from "@components/shared/icons";
+import { checkUser } from "@lib/auth";
 
 const categories = [
 	{ value: "computers", label: "Computers" },
@@ -99,6 +102,7 @@ const formSchema = z.object({
 	title: z.string().min(2, {
 		message: "Title must be at least 2 characters.",
 	}),
+	phone: z.any(),
 	category: z.string({
 		required_error: "Please select a category.",
 	}),
@@ -142,6 +146,7 @@ const formSchema = z.object({
 
 export default function ProductPostForm() {
 	const { data: session } = useSession();
+	const router = useRouter();
 	const [category, setCategory] = useState("");
 	const [subCategory, setSubCategory] = useState("");
 	const [selectedState, setSelectedState] = useState("");
@@ -199,6 +204,34 @@ export default function ProductPostForm() {
 		console.log("Images:", images);
 	}
 
+	const phoneSubmit = async (values: any) => {
+		setLoading(true);
+
+		try {
+			const userResult = await checkUser(values.phone);
+			if (userResult && userResult.code === "2") {
+				return router.push(`/verification?phone=${values.phone}`);
+			}
+			const result: any = await signIn("credentials", {
+				redirect: false,
+				phone: values.phone,
+			});
+
+			console.log({ result });
+
+			if (result.error) {
+				console.error("Sign-in Error:", result.error);
+				return;
+			}
+
+			window.location.href = "/profile";
+		} catch (error) {
+			console.error("An error occurred during sign-in:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	// if (status === "loading") {
 	// 	return (
 	// 		<div className="flex justify-center items-center h-screen">
@@ -224,7 +257,37 @@ export default function ProductPostForm() {
 							Please log in to access the product post form.
 						</p>
 						<div className="space-y-4">
-							<Button className="w-full bg-orange-300">Login with Phone</Button>
+							<form onSubmit={phoneSubmit} className="space-y-4">
+								<FormField
+									control={form.control}
+									name="phone"
+									render={({ field }: any) => (
+										<FormItem>
+											<FormControl>
+												<PhoneInput
+													country={"et"}
+													value={field.value}
+													onChange={(phone) => field.onChange(phone)}
+													inputClass="rounded-md py-5 px-10 w-full border-blue-300 bg-blue-800/30 text-gray-700 placeholder-blue-300"
+													containerClass="w-full"
+													buttonClass="bg-blue-800/30 border-blue-50"
+													dropdownClass="bg-blue-800 text-white"
+													countryCodeEditable={false}
+													enableSearch={true}
+													placeholder="Enter phone number"
+												/>
+											</FormControl>
+											<FormMessage className="text-red-300" />
+										</FormItem>
+									)}
+								/>
+								<Button
+									type="submit"
+									className="w-full bg-[#3d506a] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
+									disabled={loading}>
+									{loading ? <LoadingDots color="#ffffff" /> : "Continue"}
+								</Button>
+							</form>
 							{providers &&
 								Object.values(providers)
 									.filter((provider: any) => provider.id === "google")
