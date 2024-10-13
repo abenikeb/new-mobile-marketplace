@@ -114,7 +114,7 @@ export default function LoginPage() {
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex flex-col items-center space-y-6">
-								<Avatar className="w-32 h-32 border-4 border-orange-300">
+								<Avatar className="w-32 h-32 border-4 border-[#394b63]">
 									<AvatarFallback className="bg-[#232f3f] text-white text-4xl">
 										<UserIcon size={64} />
 									</AvatarFallback>
@@ -123,11 +123,11 @@ export default function LoginPage() {
 									<h3 className="text-2xl font-semibold mb-2 text-[#232f3f]">
 										{session.user.name}
 									</h3>
-									<p className="text-orange-400 flex items-center justify-center">
+									<p className="text-[#394b63] flex items-center justify-center">
 										<MailIcon className="mr-2" size={16} />
 										{session.user.email}
 									</p>
-									<p className="text-orange-400 flex items-center justify-center mt-1">
+									<p className="text-[#394b63] flex items-center justify-center mt-1">
 										<PhoneIcon className="mr-2" size={16} />
 										251913228892
 										{/* { session?.user?.phone ||
