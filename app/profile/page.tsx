@@ -114,7 +114,7 @@ export default function LoginPage() {
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex flex-col items-center space-y-6">
-								<Avatar className="w-32 h-32 border-4 border-blue-300">
+								<Avatar className="w-32 h-32 border-4 border-orange-300">
 									<AvatarFallback className="bg-[#232f3f] text-white text-4xl">
 										<UserIcon size={64} />
 									</AvatarFallback>
@@ -123,11 +123,11 @@ export default function LoginPage() {
 									<h3 className="text-2xl font-semibold mb-2 text-[#232f3f]">
 										{session.user.name}
 									</h3>
-									<p className="text-blue-300 flex items-center justify-center">
+									<p className="text-orange-400 flex items-center justify-center">
 										<MailIcon className="mr-2" size={16} />
 										{session.user.email}
 									</p>
-									<p className="text-blue-300 flex items-center justify-center mt-1">
+									<p className="text-orange-400 flex items-center justify-center mt-1">
 										<PhoneIcon className="mr-2" size={16} />
 										251913228892
 										{/* { session?.user?.phone ||
@@ -136,7 +136,7 @@ export default function LoginPage() {
 								</div>
 								<Button
 									onClick={() => signOut()}
-									className="w-full bg-[#2a384b] hover:bg-blue-700 text-white transition duration-150 ease-in-out">
+									className="w-full bg-[#2a384b] hover:bg-[#314157] text-white transition duration-150 ease-in-out">
 									Sign Out
 								</Button>
 							</CardContent>
@@ -210,7 +210,7 @@ export default function LoginPage() {
 																signIn(provider.id);
 																setSignInClicked(true);
 															}}
-															className="w-full bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 transition duration-150 ease-in-out h-12 text-base"
+															className="w-full bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 transition duration-150 ease-in-out h-10 text-base"
 															disabled={signInClicked}>
 															{signInClicked ? (
 																<LoadingDots color="#1e3a8a" />
