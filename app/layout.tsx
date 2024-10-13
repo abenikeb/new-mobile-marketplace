@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Raleway as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Footer from "@components/shared/footer";
+import Provider from "@/components/Provider";
 import "./globals.css";
 
 const fontSans = FontSans({
@@ -22,14 +23,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={cn(
-					"min-h-screen bg-background font-sans antialiased mb-[7vh]",
-					fontSans.variable
-				)}>
-				{children}
-			</body>
-			<Footer />
+			<Provider session={undefined}>
+				<body
+					className={cn(
+						"min-h-screen bg-background font-sans antialiased mb-[7vh]",
+						fontSans.variable
+					)}>
+					{children}
+				</body>
+				<Footer />
+			</Provider>
 		</html>
 	);
 }
