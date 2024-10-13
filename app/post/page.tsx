@@ -257,7 +257,9 @@ export default function ProductPostForm() {
 							Please log in to access the product post form.
 						</p>
 						<div className="space-y-4">
-							<form onSubmit={phoneSubmit} className="space-y-4">
+							<form
+								onSubmit={form.handleSubmit(phoneSubmit)}
+								className="space-y-4">
 								<FormField
 									control={form.control}
 									name="phone"
