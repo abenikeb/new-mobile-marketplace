@@ -56,21 +56,22 @@ const handler = NextAuth({
 		async session({ session, token }: any) {
 			console.log({ session, token });
 			if (session.user && session.user.email) {
-				try {
-					const response = await axios.get(
-						`${process.env.REMOTE_API_URL}/users?email=${session.user.email}`
-					);
-					if (response.data) {
-						session.user.id = response.data.id;
-						session.user.phone = response.data.phone;
+				return session;
+				// try {
+				// 	const response = await axios.get(
+				// 		`${process.env.REMOTE_API_URL}/users?email=${session.user.email}`
+				// 	);
+				// 	if (response.data) {
+				// 		session.user.id = response.data.id;
+				// 		session.user.phone = response.data.phone;
 
-						const cookieStore = cookies();
-						cookieStore.set("phone", response.data.phone);
-						cookieStore.set("name", response.data.user_name);
-					}
-				} catch (error) {
-					console.error("Error fetching user data:", error);
-				}
+				// 		const cookieStore = cookies();
+				// 		cookieStore.set("phone", response.data.phone);
+				// 		cookieStore.set("name", response.data.user_name);
+				// 	}
+				// } catch (error) {
+				// 	console.error("Error fetching user data:", error);
+				// }
 			} else {
 				try {
 					// const { data } = await axios.post(
