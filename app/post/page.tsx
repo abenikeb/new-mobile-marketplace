@@ -173,24 +173,24 @@ export default function ProductPostForm() {
 		multiple: true,
 	});
 
-	useEffect(() => {
-		if (status === "unauthenticated") {
-			setShowLoginModal(true);
-		}
-	}, [status]);
+	// useEffect(() => {
+	// 	if (status === "unauthenticated") {
+	// 		setShowLoginModal(true);
+	// 	}
+	// }, [status]);
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
 		console.log("Images:", images);
 	}
 
-	if (status === "loading") {
-		return (
-			<div className="flex justify-center items-center h-screen">
-				<Loader2 className="h-8 w-8 animate-spin" />
-			</div>
-		);
-	}
+	// if (status === "loading") {
+	// 	return (
+	// 		<div className="flex justify-center items-center h-screen">
+	// 			<Loader2 className="h-8 w-8 animate-spin" />
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div className="max-w-4xl mx-auto p-2 space-y-8 relative">
