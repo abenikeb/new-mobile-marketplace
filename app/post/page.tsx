@@ -38,6 +38,7 @@ import { useDropzone } from "react-dropzone";
 import { Loader2, X } from "lucide-react";
 import { LoadingDots } from "@components/shared/icons";
 import { checkUser } from "@lib/auth";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const categories = [
 	{ value: "computers", label: "Computers" },
@@ -257,39 +258,42 @@ export default function ProductPostForm() {
 							Please log in to access the product post form.
 						</p>
 						<div className="space-y-4">
-							<form
-								onSubmit={form.handleSubmit(phoneSubmit)}
-								className="space-y-4">
-								<FormField
-									control={form.control}
-									name="phone"
-									render={({ field }: any) => (
-										<FormItem>
-											<FormControl>
-												<PhoneInput
-													country={"et"}
-													value={field.value}
-													onChange={(phone) => field.onChange(phone)}
-													inputClass="rounded-md py-5 px-10 w-full border-blue-300 bg-blue-800/30 text-gray-700 placeholder-blue-300"
-													containerClass="w-full"
-													buttonClass="bg-blue-800/30 border-blue-50"
-													dropdownClass="bg-blue-800 text-white"
-													countryCodeEditable={false}
-													enableSearch={true}
-													placeholder="Enter phone number"
-												/>
-											</FormControl>
-											<FormMessage className="text-red-300" />
-										</FormItem>
-									)}
-								/>
-								<Button
-									type="submit"
-									className="w-full bg-[#3d506a] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
-									disabled={loading}>
-									{loading ? <LoadingDots color="#ffffff" /> : "Continue"}
-								</Button>
-							</form>
+							<Form {...form}>
+								<form
+									onSubmit={form.handleSubmit(onSubmit)}
+									className="space-y-4">
+									<FormField
+										control={form.control}
+										name="phone"
+										render={({ field }) => (
+											<FormItem>
+												<FormControl>
+													<PhoneInput
+														country={"et"}
+														value={field.value}
+														onChange={(phone) => field.onChange(phone)}
+														inputClass="rounded-md py-5 px-10 w-full border-blue-300 bg-blue-800/30 text-gray-700 placeholder-blue-300"
+														containerClass="w-full"
+														buttonClass="bg-blue-800/30 border-blue-50"
+														dropdownClass="bg-blue-800 text-white"
+														countryCodeEditable={false}
+														enableSearch={true}
+														placeholder="Enter phone number"
+													/>
+												</FormControl>
+												<FormMessage className="text-red-300" />
+											</FormItem>
+										)}
+									/>
+									<Button
+										type="submit"
+										className="w-full bg-[#3d506a] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
+										disabled={loading}>
+										{loading ? <LoadingDots color="#ffffff" /> : "Continue"}
+									</Button>
+								</form>
+							</Form>
+							<Separator className="my-6 bg-blue-300/30" />
 							{providers &&
 								Object.values(providers)
 									.filter((provider: any) => provider.id === "google")
