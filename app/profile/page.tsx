@@ -70,7 +70,7 @@ export default function LoginPage() {
 				return;
 			}
 
-			window.location.href = "/";
+			window.location.href = "/profile";
 		} catch (error) {
 			console.error("An error occurred during sign-in:", error);
 		} finally {
@@ -104,12 +104,12 @@ export default function LoginPage() {
 			<div className="flex-1 flex flex-col mt-12 items-center px-4 sm:px-6 lg:px-8">
 				<div className="w-full max-w-md">
 					{session?.user ? (
-						<Card className="w-full bg-white/10 backdrop-blur-md border-blue-300/20">
+						<Card className="w-full bg-white/10 backdrop-blur-md border-blue-300/30">
 							<CardHeader>
-								<CardTitle className="text-2xl font-bold text-center text-white">
+								<CardTitle className="text-2xl font-bold text-center text-gray-700">
 									Your Profile
 								</CardTitle>
-								<CardDescription className="text-center text-blue-200">
+								<CardDescription className="text-center text-gray-200">
 									Welcome back!
 								</CardDescription>
 							</CardHeader>
@@ -149,7 +149,7 @@ export default function LoginPage() {
 								</h2>
 								<p className=" text-sm text-gray-600">{`Let's get you found!`}</p>
 
-								<Card className="w-full bg-white/10 backdrop-blur-md border-blue-300/20 mt-5">
+								<Card className="w-full bg-white/10 backdrop-blur-md border-gray-300/80 mt-5">
 									<CardHeader>
 										<CardTitle className="text-2xl font-bold text-center text-blue-950">
 											Sign in
@@ -173,7 +173,7 @@ export default function LoginPage() {
 																	country={"et"}
 																	value={field.value}
 																	onChange={(phone) => field.onChange(phone)}
-																	inputClass="rounded-md py-5 px-10 w-full border-blue-300 bg-blue-800/30 text-white placeholder-blue-300"
+																	inputClass="rounded-md py-5 px-10 w-full border-blue-300 bg-blue-800/30 text-gray-700 placeholder-blue-300"
 																	containerClass="w-full"
 																	buttonClass="bg-blue-800/30 border-blue-50"
 																	dropdownClass="bg-blue-800 text-white"
@@ -188,7 +188,7 @@ export default function LoginPage() {
 												/>
 												<Button
 													type="submit"
-													className="w-full bg-blue-600 hover:bg-blue-700 text-white transition duration-150 ease-in-out h-12 text-lg"
+													className="w-full bg-blue-500 hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
 													disabled={loading}>
 													{loading ? (
 														<LoadingDots color="#ffffff" />
@@ -210,7 +210,7 @@ export default function LoginPage() {
 																signIn(provider.id);
 																setSignInClicked(true);
 															}}
-															className="w-full bg-white hover:bg-gray-100 text-blue-900 border border-blue-300 transition duration-150 ease-in-out h-12 text-lg"
+															className="w-full bg-white hover:bg-gray-100 text-gray-900 border border-gray-300 transition duration-150 ease-in-out h-12 text-base"
 															disabled={signInClicked}>
 															{signInClicked ? (
 																<LoadingDots color="#1e3a8a" />
@@ -243,9 +243,9 @@ export default function LoginPage() {
 														</Button>
 													))}
 										</div>
-										<p className="mt-6 text-center text-sm text-blue-200">
+										<p className="mt-6 text-center text-sm text-gray-700">
 											By clicking continue, you agree to our{" "}
-											<a href="#" className="text-blue-300 hover:underline">
+											<a href="#" className="text-blue-500 hover:underline">
 												Terms of Service
 											</a>{" "}
 											and{" "}
