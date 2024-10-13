@@ -144,7 +144,7 @@ function VerificationPage() {
 								/>
 								<Button
 									type="submit"
-									className="w-full bg-blue-500"
+									className="w-full bg-[#232f3f]"
 									disabled={loading}>
 									{loading ? "Verifying..." : "Verify"}
 								</Button>

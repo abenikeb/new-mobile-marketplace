@@ -109,25 +109,25 @@ export default function LoginPage() {
 								<CardTitle className="text-2xl font-bold text-center text-gray-700">
 									Your Profile
 								</CardTitle>
-								<CardDescription className="text-center text-gray-200">
+								<CardDescription className="text-center text-gray-600">
 									Welcome back!
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex flex-col items-center space-y-6">
 								<Avatar className="w-32 h-32 border-4 border-blue-300">
-									<AvatarFallback className="bg-blue-500 text-white text-4xl">
+									<AvatarFallback className="bg-[#232f3f] text-white text-4xl">
 										<UserIcon size={64} />
 									</AvatarFallback>
 								</Avatar>
 								<div className="text-center text-white">
-									<h3 className="text-2xl font-semibold mb-2">
+									<h3 className="text-2xl font-semibold mb-2 text-[#232f3f]">
 										{session.user.name}
 									</h3>
-									<p className="text-blue-200 flex items-center justify-center">
+									<p className="text-blue-300 flex items-center justify-center">
 										<MailIcon className="mr-2" size={16} />
 										{session.user.email}
 									</p>
-									<p className="text-blue-200 flex items-center justify-center mt-1">
+									<p className="text-blue-300 flex items-center justify-center mt-1">
 										<PhoneIcon className="mr-2" size={16} />
 										251913228892
 										{/* { session?.user?.phone ||
@@ -136,7 +136,7 @@ export default function LoginPage() {
 								</div>
 								<Button
 									onClick={() => signOut()}
-									className="w-full bg-blue-600 hover:bg-blue-700 text-white transition duration-150 ease-in-out">
+									className="w-full bg-[#2a384b] hover:bg-blue-700 text-white transition duration-150 ease-in-out">
 									Sign Out
 								</Button>
 							</CardContent>
@@ -188,7 +188,7 @@ export default function LoginPage() {
 												/>
 												<Button
 													type="submit"
-													className="w-full bg-blue-500 hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
+													className="w-full bg-[#3d506a] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
 													disabled={loading}>
 													{loading ? (
 														<LoadingDots color="#ffffff" />

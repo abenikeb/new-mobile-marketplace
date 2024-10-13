@@ -50,7 +50,7 @@ const Header = () => {
 	};
 	return (
 		<>
-			<header className="bg-[#424b58] sticky top-0 z-50 w-full backdrop-blur text-white">
+			<header className="bg-[#232f3f] sticky top-0 z-50 w-full backdrop-blur text-white">
 				<div className="container mx-auto px-2">
 					<div className="flex items-center justify-between py-2">
 						<div className="flex items-center">
