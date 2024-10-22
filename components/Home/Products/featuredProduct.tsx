@@ -70,7 +70,7 @@ const FeaturedProduct = () => {
 				<div className="flex justify-between items-center mb-8">
 					<h2 className="text-3xl font-bold">Featured Products</h2>
 					<Button variant="outline" asChild>
-						<Link href="/products">
+						<Link href="/product">
 							See More
 							<ChevronRight className="ml-2 h-4 w-4" />
 						</Link>

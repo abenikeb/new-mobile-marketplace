@@ -23,20 +23,20 @@ export default function ProductPostPage() {
 	const [currentImage, setCurrentImage] = useState(0);
 
 	const product = {
-		name: "Vintage Leather Armchair",
+		name: "Vintage Flat Laptop",
 		price: 299.99,
 		description:
 			"Beautiful vintage leather armchair in excellent condition. Perfect for adding a touch of classic elegance to any room.",
 		condition: "Used - Like New",
-		category: "Furniture",
-		location: "New York, NY",
+		category: "Laptop",
+		location: "Addis Ababa, Mexico",
 		images: [
 			"/assets/images/product1.jpg?height=400&width=600",
-			"/assets/images/product1.jpg?height=400&width=600",
-			"/assets/images/product1.jpg?height=400&width=600",
+			"/assets/images/product2.jpg?height=400&width=600",
+			"/assets/images/product3.jpg?height=400&width=600",
 		],
 		seller: {
-			name: "Jane Smith",
+			name: "Abebe Teklu",
 			rating: 4.8,
 			totalSales: 52,
 			avatar: "/placeholder.svg?height=40&width=40",
@@ -54,7 +54,7 @@ export default function ProductPostPage() {
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-6">
+		<div className="container mx-auto px-4 py-3">
 			<header className="flex justify-between items-center mb-8">
 				<Button variant="ghost" size="icon" asChild>
 					<Link href="/">
@@ -109,7 +109,7 @@ export default function ProductPostPage() {
 					<div>
 						<h1 className="text-3xl font-bold">{product.name}</h1>
 						<p className="text-2xl font-semibold mt-2">
-							${product.price.toFixed(2)}
+							{product.price.toFixed(2)} Birr
 						</p>
 					</div>
 					<div className="flex space-x-2">
@@ -177,11 +177,11 @@ export default function ProductPostPage() {
 				<TabsContent value="shipping" className="mt-4">
 					<h2 className="text-xl font-semibold mb-2">Shipping Information</h2>
 					<p>
-						This item is available for local pickup in New York City or can be
-						shipped nationwide.
+						This item is available for local pickup in Addis Ababa City or can
+						be shipped nationwide.
 					</p>
 					<p className="mt-2">
-						Estimated shipping cost: $50 - $100 depending on location
+						Estimated shipping cost: 50 Birr - 100 Birr depending on location
 					</p>
 					<p className="mt-2">Delivery time: 5-7 business days</p>
 				</TabsContent>
@@ -191,9 +191,7 @@ export default function ProductPostPage() {
 						{product.seller.name} has been a trusted seller on our platform
 						since 2019.
 					</p>
-					<p className="mt-2">
-						Specializes in vintage furniture and home decor.
-					</p>
+					<p className="mt-2">Specializes in vintage Laptop and home decor.</p>
 					<p className="mt-2">
 						Return policy: 14-day returns accepted for items in original
 						condition.

@@ -1,5 +1,3 @@
-"use client";
-import { useState, useEffect } from "react";
 import AllProducts from "@components/Home/Products/allProducts";
 import Category from "@components/Home/Products/category";
 import Header from "@components/Home/header";

@@ -66,7 +66,7 @@ const Header = () => {
 								</SheetTrigger>
 								<SheetContent
 									side="left"
-									className="w-[300px] sm:w-[400px] bg-amber-50">
+									className="w-[300px] sm:w-[400px] bg-gray-50">
 									<nav className="flex flex-col gap-4">
 										{categories.map((category) => (
 											<Link
