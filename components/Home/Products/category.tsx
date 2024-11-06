@@ -3,19 +3,7 @@
 import { useState, FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	ChevronRight,
-	Search,
-	Laptop,
-	User,
-	Menu,
-	Smartphone,
-	Headphones,
-	Camera,
-	Tv,
-	Watch,
-	Gamepad,
-} from "lucide-react";
+import { Apple, Egg, Carrot, Milk, Fish } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,13 +11,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 
 const categories = [
-	{ name: "Laptops", icon: Laptop },
-	{ name: "Smartphones", icon: Smartphone },
-	{ name: "Audio", icon: Headphones },
-	{ name: "Cameras", icon: Camera },
-	{ name: "TVs", icon: Tv },
-	{ name: "Wearables", icon: Watch },
-	{ name: "Gaming", icon: Gamepad },
+	{ name: "Fruits & Vegetables", icon: Apple },
+	{ name: "Dairy Products", icon: Egg },
+	{ name: "Beverages", icon: Carrot },
+	{ name: "Snacks", icon: Fish },
+	{ name: "Bakery", icon: Milk },
+	{ name: "Wearables", icon: Apple },
+	{ name: "Biisho", icon: Fish },
 ];
 const Category = () => {
 	return (

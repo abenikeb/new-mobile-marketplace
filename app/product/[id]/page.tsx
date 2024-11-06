@@ -18,17 +18,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 export default function ProductPostPage() {
+	const router = useRouter();
 	const [currentImage, setCurrentImage] = useState(0);
 
 	const product = {
-		name: "Vintage Flat Laptop",
+		name: "Organic Apples",
 		price: 299.99,
 		description:
-			"Beautiful vintage leather armchair in excellent condition. Perfect for adding a touch of classic elegance to any room.",
-		condition: "Used - Like New",
-		category: "Laptop",
+			"Beautiful Organic Apples leather armchair in excellent condition. Perfect for adding a touch of classic elegance to any room.",
+		condition: "Fresh - New",
+		category: "Fruits & Vegetables",
 		location: "Addis Ababa, Mexico",
 		images: [
 			"/assets/images/product1.jpg?height=400&width=600",
@@ -36,7 +38,7 @@ export default function ProductPostPage() {
 			"/assets/images/product3.jpg?height=400&width=600",
 		],
 		seller: {
-			name: "Abebe Teklu",
+			name: "For Organic",
 			rating: 4.8,
 			totalSales: 52,
 			avatar: "/placeholder.svg?height=40&width=40",
@@ -51,6 +53,10 @@ export default function ProductPostPage() {
 		setCurrentImage(
 			(prev) => (prev - 1 + product.images.length) % product.images.length
 		);
+	};
+
+	const handleBuyNow = (productId: string) => {
+		router.push(`/checkout`);
 	};
 
 	return (
@@ -118,7 +124,10 @@ export default function ProductPostPage() {
 					</div>
 					<p className="text-muted-foreground">{product.description}</p>
 					<div className="flex items-center space-x-4">
-						<Button className="flex-1">Buy Now</Button>
+						<Button onClick={() => handleBuyNow("roductId")} className="flex-1">
+							Buy Now
+						</Button>
+
 						<Button variant="outline" size="icon">
 							<Heart className="h-4 w-4" />
 						</Button>
@@ -167,11 +176,11 @@ export default function ProductPostPage() {
 				<TabsContent value="details" className="mt-4">
 					<h2 className="text-xl font-semibold mb-2">Product Details</h2>
 					<ul className="list-disc pl-5 space-y-1">
-						<li>Material: Genuine leather</li>
+						<li>Material: Fruits & Vegetables</li>
 						<li>Color: Brown</li>
 						<li>Dimensions: 30" W x 35" D x 38" H</li>
-						<li>Weight: Approximately 50 lbs</li>
-						<li>Year of manufacture: Circa 1960s</li>
+						<li>Weight: one lbs</li>
+						<li>Year of manufacture: Circa 2024s</li>
 					</ul>
 				</TabsContent>
 				<TabsContent value="shipping" className="mt-4">

@@ -1,12 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { HomeIcon, ListIcon, ShoppingCartIcon, UserIcon } from "./common";
-import { CameraIcon, MessageCircle } from "lucide-react";
+import {
+	HomeIcon,
+	ListIcon,
+	ShoppingCartIcon,
+	UserIcon,
+	MenuIcon,
+} from "./common";
+import { PackageIcon } from "lucide-react";
 
-const Footer = () => {
+export default function Footer() {
 	return (
 		<div>
-			{" "}
 			<nav className="bg-background border-t flex justify-between py-2 fixed bottom-0 w-full px-6">
 				<Link
 					href="/"
@@ -26,15 +31,15 @@ const Footer = () => {
 					href="/post"
 					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
 					prefetch={false}>
-					<CameraIcon className="w-6 h-6" />
+					<MenuIcon className="w-6 h-6" />
 					<span className="text-xs">Post</span>
 				</Link>
 				<Link
-					href="/messagesPage"
-					className="flex flex-col justify-center items-center gap-1 text-muted-foreground hover:text-foreground"
+					href="/orders"
+					className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground"
 					prefetch={false}>
-					<MessageCircle className="w-6 h-6" />
-					<span className="text-xs">Messages</span>
+					<PackageIcon className="w-6 h-6" />
+					<span className="text-xs">Orders</span>
 				</Link>
 				<Link
 					href="/profile"
@@ -46,6 +51,4 @@ const Footer = () => {
 			</nav>
 		</div>
 	);
-};
-
-export default Footer;
+}

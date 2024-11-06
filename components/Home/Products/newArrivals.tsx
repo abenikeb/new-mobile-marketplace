@@ -1,43 +1,31 @@
+"use client";
+import { useEffect, useState } from "react";
+
 import { Button } from "@components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
-
-const newArrivals = [
-	{
-		id: 1,
-		name: "Smart Home Hub",
-		price: 129.99,
-		image: "/assets/images/product2.jpg?height=200&width=200",
-	},
-	{
-		id: 2,
-		name: "Wireless Keyboard",
-		price: 59.99,
-		image: "/assets/images/product3.jpg?height=200&width=200",
-	},
-	{
-		id: 3,
-		name: "4K Webcam",
-		price: 99.99,
-		image: "/assets/images/product4.jpg?height=200&width=200",
-	},
-	{
-		id: 4,
-		name: "Ergonomic Mouse",
-		price: 49.99,
-		image: "/assets/images/product1.jpg?height=200&width=200",
-	},
-];
+import { getAllProducts } from "@lib/data";
 
 const NewArrivals = () => {
+	const [newArrivals, setNewArrivals] = useState<any>([]);
+
+	const fetcProductItems = async () => {
+		const products = await getAllProducts();
+		setNewArrivals(products);
+	};
+
+	useEffect(() => {
+		fetcProductItems();
+	}, []);
+
 	return (
 		<div>
-			<section className="py-8 bg-gray-100">
-				<div className="container mx-auto px-4">
-					<h2 className="text-2xl font-bold mb-4">New Arrivals</h2>
+			<section className="py-4 bg-gray-100">
+				<div className="container mx-auto pl-4 pr-0">
+					<h2 className="text-xl font-bold mb-4">New Arrivals</h2>
 					<div className="relative">
-						<div className="flex overflow-x-auto space-x-4 pb-4">
-							{newArrivals.map((product) => (
+						<div className="flex overflow-x-auto space-x-2 pb-4">
+							{newArrivals.map((product: any) => (
 								<div key={product.id} className="flex-none w-40">
 									<div className="bg-white rounded-lg shadow-md overflow-hidden">
 										<img
