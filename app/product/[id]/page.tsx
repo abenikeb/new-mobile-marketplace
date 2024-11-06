@@ -25,15 +25,15 @@ export default function ProductPostPage() {
 	const [currentImage, setCurrentImage] = useState(0);
 
 	const product = {
-		name: "Organic Apples",
-		price: 299.99,
+		name: "4K OLED TV",
+		price: 2299.99,
 		description:
-			"Beautiful Organic Apples leather armchair in excellent condition. Perfect for adding a touch of classic elegance to any room.",
-		condition: "Fresh - New",
-		category: "Fruits & Vegetables",
+			"Experience stunning visuals with our latest 4K OLED technology.",
+		condition: "Brand - New",
+		category: "televisions",
 		location: "Addis Ababa, Mexico",
 		images: [
-			"/assets/images/product1.jpg?height=400&width=600",
+			"/assets/images/4k_tv.jpg?height=400&width=600",
 			"/assets/images/product2.jpg?height=400&width=600",
 			"/assets/images/product3.jpg?height=400&width=600",
 		],

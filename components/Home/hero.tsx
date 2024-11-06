@@ -9,9 +9,9 @@ const Hero = () => {
 	const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
 	const bannerImages = [
-		"/assets/images/banner2.png?height=150&width=1200&text=Summer+Sale",
-		"/assets/images/banner2.png?height=150&width=1200&text=New+Arrivals",
-		"/assets/images/banner2.jpg?height=150&width=1200&text=Special+Offers",
+		"/assets/images/banner_main.jpg?height=150&width=1200&text=Summer+Sale",
+		"/assets/images/banner_main.jpg?height=150&width=1200&text=New+Arrivals",
+		"/assets/images/banner_main3.jpg?height=150&width=1200&text=Special+Offers",
 	];
 
 	useEffect(() => {

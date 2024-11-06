@@ -102,7 +102,7 @@ const PopularProducts = () => {
 							: topRatedProducts.map((product: any) => (
 									<div
 										key={product.id}
-										className="flex-none w-40 sm:w-48 group">
+										className="flex-none w-36 sm:w-48 group">
 										<div className="bg-white relative rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
 											<div className="relative w-full">
 												<Image
