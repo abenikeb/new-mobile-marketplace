@@ -11,7 +11,7 @@ const Hero = () => {
 	const bannerImages = [
 		"/assets/images/banner_main.jpg?height=150&width=1200&text=Summer+Sale",
 		"/assets/images/banner_main.jpg?height=150&width=1200&text=New+Arrivals",
-		"/assets/images/banner_main3.jpg?height=150&width=1200&text=Special+Offers",
+		"/assets/images/banner.jpg?height=150&width=1200&text=Special+Offers",
 	];
 
 	useEffect(() => {
