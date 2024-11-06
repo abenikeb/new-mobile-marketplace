@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -74,6 +75,7 @@ export default function Header() {
 	const [loading, setLoading] = useState(false);
 	const [providers, setProviders] = useState<any>(null);
 	const { data: session } = useSession();
+	const router = useRouter();
 
 	const fetchCategories = async () => {
 		const fetchedCategories = await getCategories();
@@ -139,18 +141,19 @@ export default function Header() {
 	};
 
 	const handleIconClick = async (type: "messages" | "products") => {
-		if (!session?.user) {
-			setIsLoginModalOpen(true);
-			return;
-		}
-		if (!isVendor) {
-			setIsVendorModalOpen(true);
-			return;
-		}
+		// if (!session?.user) {
+		// 	setIsLoginModalOpen(true);
+		// 	return;
+		// }
+		// if (!isVendor) {
+		// 	setIsVendorModalOpen(true);
+		// 	return;
+		// }
 		if (type === "messages") {
-			setIsMessagesOpen(true);
+			router.push("/messagesPage");
 		} else {
-			setIsProductsOpen(true);
+			router.push("/myProducts");
+			// setIsProductsOpen(true);
 		}
 	};
 

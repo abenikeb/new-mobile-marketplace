@@ -1,218 +1,289 @@
 "use client";
-
-import { useState } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import { format } from "date-fns";
-import { Send } from "lucide-react";
+import { ArrowLeft, Send } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-type Conversation = {
-	id: string;
-	user: {
-		name: string;
-		avatar: string;
-	};
-	lastMessage: string;
-	timestamp: Date;
-	unread: boolean;
-};
+import { Separator } from "@/components/ui/separator";
 
 type Message = {
 	id: string;
-	sender: "user" | "other";
+	sender: "vendor" | "customer";
 	content: string;
 	timestamp: Date;
 };
 
-const conversations: Conversation[] = [
+type Conversation = {
+	id: string;
+	customerName: string;
+	customerAvatar: string;
+	lastMessage: string;
+	unread: boolean;
+	messages: Message[];
+};
+
+const initialConversations: Conversation[] = [
 	{
 		id: "1",
-		user: {
-			name: "Alice Smith",
-			avatar: "/placeholder.svg?height=40&width=40",
-		},
-		lastMessage: "Hi, is this item still available?",
-		timestamp: new Date("2023-06-10T10:30:00"),
+		customerName: "Tigist Alemayehu",
+		customerAvatar: "/placeholder.svg?height=40&width=40",
+		lastMessage: "Thank you for the quick response!",
 		unread: true,
+		messages: [
+			{
+				id: "1",
+				sender: "customer",
+				content:
+					"Hello, I have a question about the Ethiopian coffee you're selling.",
+				timestamp: new Date(2023, 5, 1, 10, 30),
+			},
+			{
+				id: "2",
+				sender: "vendor",
+				content:
+					"Hello Tigist! I'd be happy to help. What would you like to know?",
+				timestamp: new Date(2023, 5, 1, 10, 35),
+			},
+			{
+				id: "3",
+				sender: "customer",
+				content: "Is it single-origin? And how dark is the roast?",
+				timestamp: new Date(2023, 5, 1, 10, 40),
+			},
+			{
+				id: "4",
+				sender: "vendor",
+				content:
+					"Yes, it's single-origin from Yirgacheffe. The roast is medium-dark, perfect for espresso or filter coffee.",
+				timestamp: new Date(2023, 5, 1, 10, 45),
+			},
+			{
+				id: "5",
+				sender: "customer",
+				content: "Thank you for the quick response!",
+				timestamp: new Date(2023, 5, 1, 10, 50),
+			},
+		],
 	},
 	{
 		id: "2",
-		user: {
-			name: "Bob Johnson",
-			avatar: "/placeholder.svg?height=40&width=40",
-		},
-		lastMessage: "Thanks for the quick response!",
-		timestamp: new Date("2023-06-09T15:45:00"),
+		customerName: "Dawit Tadesse",
+		customerAvatar: "/placeholder.svg?height=40&width=40",
+		lastMessage: "When will my order be shipped?",
 		unread: false,
-	},
-	{
-		id: "3",
-		user: {
-			name: "Carol Williams",
-			avatar: "/placeholder.svg?height=40&width=40",
-		},
-		lastMessage: "Can you provide more details about the product?",
-		timestamp: new Date("2023-06-08T09:15:00"),
-		unread: true,
-	},
-];
-
-const messages: Message[] = [
-	{
-		id: "1",
-		sender: "other",
-		content: "Hi, is this item still available?",
-		timestamp: new Date("2023-06-10T10:30:00"),
-	},
-	{
-		id: "2",
-		sender: "user",
-		content: "Yes, it's still available. Are you interested in purchasing?",
-		timestamp: new Date("2023-06-10T10:35:00"),
-	},
-	{
-		id: "3",
-		sender: "other",
-		content: "Great! Can you tell me more about its condition?",
-		timestamp: new Date("2023-06-10T10:40:00"),
-	},
-	{
-		id: "4",
-		sender: "user",
-		content:
-			"The item is in excellent condition. It's only been used a few times and has no visible wear or damage.",
-		timestamp: new Date("2023-06-10T10:45:00"),
+		messages: [
+			{
+				id: "1",
+				sender: "customer",
+				content:
+					"Hi there, I placed an order for a traditional Ethiopian dress last week.",
+				timestamp: new Date(2023, 5, 2, 14, 0),
+			},
+			{
+				id: "2",
+				sender: "vendor",
+				content:
+					"Hello Dawit! Thank you for your order. Could you please provide your order number?",
+				timestamp: new Date(2023, 5, 2, 14, 10),
+			},
+			{
+				id: "3",
+				sender: "customer",
+				content: "Sure, it's ETH12345.",
+				timestamp: new Date(2023, 5, 2, 14, 15),
+			},
+			{
+				id: "4",
+				sender: "vendor",
+				content:
+					"Thank you. I see your order is being prepared for shipping. It should be dispatched within 2 business days.",
+				timestamp: new Date(2023, 5, 2, 14, 20),
+			},
+			{
+				id: "5",
+				sender: "customer",
+				content: "When will my order be shipped?",
+				timestamp: new Date(2023, 5, 2, 14, 25),
+			},
+		],
 	},
 ];
 
-export default function MessagesPage() {
+export default function VendorMessages() {
+	const [conversations, setConversations] =
+		useState<Conversation[]>(initialConversations);
 	const [selectedConversation, setSelectedConversation] =
 		useState<Conversation | null>(null);
 	const [newMessage, setNewMessage] = useState("");
 
-	const handleSendMessage = () => {
-		if (newMessage.trim() !== "") {
-			// Here you would typically send the message to your backend
-			console.log("Sending message:", newMessage);
-			setNewMessage("");
-		}
+	const handleSelectConversation = (conversation: Conversation) => {
+		setSelectedConversation(conversation);
+		// Mark conversation as read
+		setConversations((prevConversations) =>
+			prevConversations.map((conv) =>
+				conv.id === conversation.id ? { ...conv, unread: false } : conv
+			)
+		);
+	};
+
+	const handleSendMessage = (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!newMessage.trim() || !selectedConversation) return;
+
+		const updatedMessage: Message = {
+			id: Date.now().toString(),
+			sender: "vendor",
+			content: newMessage.trim(),
+			timestamp: new Date(),
+		};
+
+		setConversations((prevConversations) =>
+			prevConversations.map((conv) =>
+				conv.id === selectedConversation.id
+					? {
+							...conv,
+							messages: [...conv.messages, updatedMessage],
+							lastMessage: updatedMessage.content,
+					  }
+					: conv
+			)
+		);
+
+		setSelectedConversation((prev) =>
+			prev
+				? {
+						...prev,
+						messages: [...prev.messages, updatedMessage],
+						lastMessage: updatedMessage.content,
+				  }
+				: null
+		);
+
+		setNewMessage("");
 	};
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Messages</h1>
-			<div className="flex flex-col md:flex-row gap-8">
-				<div className="w-full md:w-1/3">
-					<h2 className="text-xl font-semibold mb-4">Conversations</h2>
-					<ScrollArea className="h-[600px]">
-						{conversations.map((conversation) => (
-							<div
-								key={conversation.id}
-								className={`flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-100 ${
-									selectedConversation?.id === conversation.id
-										? "bg-gray-100"
-										: ""
-								}`}
-								onClick={() => setSelectedConversation(conversation)}>
-								<Avatar>
-									<AvatarImage
-										src={conversation.user.avatar}
-										alt={conversation.user.name}
-									/>
-									<AvatarFallback>
-										{conversation.user.name.charAt(0)}
-									</AvatarFallback>
-								</Avatar>
-								<div className="flex-1">
-									<div className="flex justify-between items-baseline">
-										<h3 className="font-semibold">{conversation.user.name}</h3>
-										<span className="text-sm text-gray-500">
-											{format(conversation.timestamp, "MMM d")}
-										</span>
-									</div>
-									<p className="text-sm text-gray-600 truncate">
-										{conversation.lastMessage}
-									</p>
-								</div>
-								{conversation.unread && (
-									<div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-								)}
-							</div>
-						))}
-					</ScrollArea>
-				</div>
-				<div className="flex-1">
-					{selectedConversation ? (
-						<div className="flex flex-col h-[600px]">
-							<div className="flex items-center gap-4 p-4 border-b">
-								<Avatar>
-									<AvatarImage
-										src={selectedConversation.user.avatar}
-										alt={selectedConversation.user.name}
-									/>
-									<AvatarFallback>
-										{selectedConversation.user.name.charAt(0)}
-									</AvatarFallback>
-								</Avatar>
-								<h2 className="text-xl font-semibold">
-									{selectedConversation.user.name}
-								</h2>
-							</div>
-							<ScrollArea className="flex-1 p-4">
-								{messages.map((message) => (
-									<div
-										key={message.id}
-										className={`flex ${
-											message.sender === "user"
-												? "justify-end"
-												: "justify-start"
-										} mb-4`}>
-										<div
-											className={`max-w-[70%] p-3 rounded-lg ${
-												message.sender === "user"
-													? "bg-blue-500 text-white"
-													: "bg-gray-200 text-gray-800"
-											}`}>
-											<p>{message.content}</p>
-											<span className="text-xs mt-1 block text-right">
-												{format(message.timestamp, "h:mm a")}
-											</span>
+		<div className="container mx-auto p-6 space-y-8 bg-gray-50">
+			<div className="flex items-center justify-between mb-6">
+				<Button
+					variant="ghost"
+					className="text-blue-900 hover:text-blue-700"
+					onClick={() => window.history.back()}>
+					<ArrowLeft className="mr-2 h-4 w-4" />
+					Back to Dashboard
+				</Button>
+				<h1 className="text-3xl font-bold text-blue-900">Messages</h1>
+			</div>
+
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<Card className="md:col-span-1 bg-white shadow-md">
+					<CardHeader>
+						<CardTitle className="text-blue-900">Conversations</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<ScrollArea className="h-[600px]">
+							{conversations.map((conversation) => (
+								<div key={conversation.id} className="mb-4">
+									<button
+										className={`w-full text-left p-3 rounded-lg transition-colors ${
+											selectedConversation?.id === conversation.id
+												? "bg-blue-100"
+												: "hover:bg-gray-100"
+										}`}
+										onClick={() => handleSelectConversation(conversation)}>
+										<div className="flex items-center space-x-3">
+											<Avatar>
+												<AvatarImage
+													src={conversation.customerAvatar}
+													alt={conversation.customerName}
+												/>
+												<AvatarFallback>
+													{conversation.customerName
+														.split(" ")
+														.map((n) => n[0])
+														.join("")}
+												</AvatarFallback>
+											</Avatar>
+											<div className="flex-1 min-w-0">
+												<p className="text-sm font-medium text-gray-900 truncate">
+													{conversation.customerName}
+												</p>
+												<p className="text-sm text-gray-500 truncate">
+													{conversation.lastMessage}
+												</p>
+											</div>
+											{conversation.unread && (
+												<span className="inline-block w-2 h-2 bg-blue-600 rounded-full"></span>
+											)}
 										</div>
-									</div>
-								))}
-							</ScrollArea>
-							<div className="p-4 border-t">
+									</button>
+									<Separator className="my-2" />
+								</div>
+							))}
+						</ScrollArea>
+					</CardContent>
+				</Card>
+
+				<Card className="md:col-span-2 bg-white shadow-md">
+					<CardHeader>
+						<CardTitle className="text-blue-900">
+							{selectedConversation
+								? selectedConversation.customerName
+								: "Select a conversation"}
+						</CardTitle>
+					</CardHeader>
+					<CardContent>
+						{selectedConversation ? (
+							<>
+								<ScrollArea className="h-[500px] pr-4">
+									{selectedConversation.messages.map((message) => (
+										<div
+											key={message.id}
+											className={`mb-4 ${
+												message.sender === "vendor" ? "text-right" : "text-left"
+											}`}>
+											<div
+												className={`inline-block p-3 rounded-lg ${
+													message.sender === "vendor"
+														? "bg-blue-100 text-blue-900"
+														: "bg-gray-100 text-gray-900"
+												}`}>
+												<p className="text-sm">{message.content}</p>
+												<p className="text-xs text-gray-500 mt-1">
+													{format(message.timestamp, "HH:mm")}
+												</p>
+											</div>
+										</div>
+									))}
+								</ScrollArea>
 								<form
-									onSubmit={(e) => {
-										e.preventDefault();
-										handleSendMessage();
-									}}
-									className="flex gap-2">
+									onSubmit={handleSendMessage}
+									className="mt-4 flex items-center">
 									<Input
 										type="text"
-										placeholder="Type a message..."
+										placeholder="Type your message..."
 										value={newMessage}
 										onChange={(e) => setNewMessage(e.target.value)}
-										className="flex-1"
+										className="flex-1 mr-2"
 									/>
-									<Button type="submit">
-										<Send className="h-4 w-4 mr-2" />
-										Send
+									<Button
+										type="submit"
+										className="bg-blue-900 hover:bg-blue-800">
+										<Send className="h-4 w-4" />
+										<span className="sr-only">Send message</span>
 									</Button>
 								</form>
-							</div>
-						</div>
-					) : (
-						<div className="flex items-center justify-center h-[600px] bg-gray-100 rounded-lg">
-							<p className="text-gray-500">
+							</>
+						) : (
+							<p className="text-center text-gray-500">
 								Select a conversation to start messaging
 							</p>
-						</div>
-					)}
-				</div>
+						)}
+					</CardContent>
+				</Card>
 			</div>
 		</div>
 	);
