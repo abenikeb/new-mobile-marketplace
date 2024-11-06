@@ -141,10 +141,10 @@ export default function Header() {
 	};
 
 	const handleIconClick = async (type: "messages" | "products") => {
-		// if (!session?.user) {
-		// 	setIsLoginModalOpen(true);
-		// 	return;
-		// }
+		if (!session?.user) {
+			setIsLoginModalOpen(true);
+			return;
+		}
 		// if (!isVendor) {
 		// 	setIsVendorModalOpen(true);
 		// 	return;
