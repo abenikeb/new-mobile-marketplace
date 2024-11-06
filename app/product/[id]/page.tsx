@@ -38,7 +38,7 @@ export default function ProductPostPage() {
 			"/assets/images/product3.jpg?height=400&width=600",
 		],
 		seller: {
-			name: "For Organic",
+			name: "Biisho Market",
 			rating: 4.8,
 			totalSales: 52,
 			avatar: "/placeholder.svg?height=40&width=40",
@@ -176,7 +176,7 @@ export default function ProductPostPage() {
 				<TabsContent value="details" className="mt-4">
 					<h2 className="text-xl font-semibold mb-2">Product Details</h2>
 					<ul className="list-disc pl-5 space-y-1">
-						<li>Material: Fruits & Vegetables</li>
+						<li>Material: Televisions</li>
 						<li>Color: Brown</li>
 						<li>Dimensions: 30" W x 35" D x 38" H</li>
 						<li>Weight: one lbs</li>
