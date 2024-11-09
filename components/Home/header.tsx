@@ -11,16 +11,12 @@ import {
 	MessageSquare,
 	ChevronRight,
 	X,
+	Bell,
+	RefreshCw,
+	Badge,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-	Sheet,
-	SheetContent,
-	SheetTrigger,
-	SheetClose,
-	SheetHeader,
-	SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -36,50 +32,27 @@ import { getCategories } from "@/lib/data";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { LoadingDots } from "@components/shared/icons";
 
-// Mock functions for user session and vendor status - replace these with your actual authentication logic
-const checkUserSession = () => {
-	// Simulating an async operation
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			// For demo purposes, we'll randomly decide if a session exists
-			resolve(Math.random() > 0.5);
-		}, 500);
-	});
-};
-
-const checkVendorStatus = () => {
-	// Simulating an async operation
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			// For demo purposes, we'll randomly decide if the user is a vendor
-			resolve(Math.random() > 0.5);
-		}, 500);
-	});
-};
-
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-	const [isVendorModalOpen, setIsVendorModalOpen] = useState(false);
-	const [isProductsOpen, setIsProductsOpen] = useState(false);
-	const [isMessagesOpen, setIsMessagesOpen] = useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [categories, setCategories] = useState<any>([]);
-	const [vendorName, setVendorName] = useState("");
-	const [vendorEmail, setVendorEmail] = useState("");
-	const [loginEmail, setLoginEmail] = useState("");
-	const [loginPassword, setLoginPassword] = useState("");
-	const [userSession, setUserSession] = useState(false);
-	const [isVendor, setIsVendor] = useState(false);
 	const [signInClicked, setSignInClicked] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [providers, setProviders] = useState<any>(null);
 	const { data: session } = useSession();
 	const router = useRouter();
 
+	const [notificationCount, setNotificationCount] = useState(0);
+
 	const fetchCategories = async () => {
 		const fetchedCategories = await getCategories();
 		setCategories(fetchedCategories);
+	};
+
+	const handleRefresh = () => {
+		// Add your refresh logic here
+		console.log("Refreshing...");
 	};
 
 	useEffect(() => {
@@ -109,53 +82,6 @@ export default function Header() {
 		{ name: "Create Listing", href: "/create-listing" },
 		{ name: "Product Analytics", href: "/product-analytics" },
 	];
-
-	const handleLogin = async (e: React.FormEvent) => {
-		e.preventDefault();
-		// Here you would typically send the loginEmail and loginPassword to your backend
-		console.log("Login attempt:", { loginEmail, loginPassword });
-		const sessionExists = await checkUserSession();
-		setUserSession(sessionExists as any);
-		setIsLoginModalOpen(false);
-		// Reset form fields
-		setLoginEmail("");
-		setLoginPassword("");
-		if (sessionExists) {
-			const vendorStatus = await checkVendorStatus();
-			setIsVendor(vendorStatus as any);
-			if (!vendorStatus) {
-				setIsVendorModalOpen(true);
-			}
-		}
-	};
-
-	const handleVendorRegistration = (e: React.FormEvent) => {
-		e.preventDefault();
-		// Here you would typically send the vendorName and vendorEmail to your backend
-		console.log("Vendor Registration:", { vendorName, vendorEmail });
-		setIsVendor(true);
-		setIsVendorModalOpen(false);
-		// Reset form fields
-		setVendorName("");
-		setVendorEmail("");
-	};
-
-	const handleIconClick = async (type: "messages" | "products") => {
-		if (!session?.user) {
-			setIsLoginModalOpen(true);
-			return;
-		}
-		// if (!isVendor) {
-		// 	setIsVendorModalOpen(true);
-		// 	return;
-		// }
-		if (type === "messages") {
-			router.push("/messagesPage");
-		} else {
-			router.push("/myProducts");
-			// setIsProductsOpen(true);
-		}
-	};
 
 	return (
 		<header className="bg-[#232f3f] sticky top-0 z-50 w-full backdrop-blur text-white">
@@ -236,22 +162,27 @@ export default function Header() {
 						</Link>
 					</div>
 
-					<div className="flex items-center space-x-8 mr-2">
+					<div className="flex items-center space-x-4 mr-2">
 						<Button
 							variant="ghost"
 							size="icon"
 							className="text-white hover:text-yellow-300 transition-colors flex flex-col items-center"
-							onClick={() => handleIconClick("messages")}>
-							<MessageSquare className="h-6 w-6" />
-							<span className="text-xs mt-1">Messages</span>
+							onClick={handleRefresh}>
+							<RefreshCw className="h-6 w-6" />
+							{/* <span className="text-xs mt-1">Refresh</span> */}
 						</Button>
 						<Button
 							variant="ghost"
 							size="icon"
-							className="text-white hover:text-yellow-300 transition-colors flex flex-col items-center"
-							onClick={() => handleIconClick("products")}>
-							<Package className="h-6 w-6" />
-							<span className="text-xs mt-1">My Products</span>
+							className="text-white hover:text-yellow-300 transition-colors flex flex-col items-center relative"
+							onClick={() => router.push("/notifications")}>
+							<Bell className="h-6 w-6" />
+							{notificationCount > 0 && (
+								<Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs">
+									{notificationCount}
+								</Badge>
+							)}
+							{/* <span className="text-xs mt-1">Notifications</span> */}
 						</Button>
 					</div>
 				</div>
@@ -308,122 +239,8 @@ export default function Header() {
 									</Button>
 								))}
 					</div>
-					{/* <form onSubmit={handleLogin}>
-						<div className="grid gap-4 py-4">
-							<div className="grid grid-cols-4 items-center gap-4">
-								<Label htmlFor="login-email" className="text-right">
-									Email
-								</Label>
-								<Input
-									id="login-email"
-									type="email"
-									value={loginEmail}
-									onChange={(e) => setLoginEmail(e.target.value)}
-									className="col-span-3"
-									required
-								/>
-							</div>
-							<div className="grid grid-cols-4 items-center gap-4">
-								<Label htmlFor="login-password" className="text-right">
-									Password
-								</Label>
-								<Input
-									id="login-password"
-									type="password"
-									value={loginPassword}
-									onChange={(e) => setLoginPassword(e.target.value)}
-									className="col-span-3"
-									required
-								/>
-							</div>
-						</div>
-						<DialogFooter>
-							<Button type="submit">Log In</Button>
-						</DialogFooter>
-					</form> */}
 				</DialogContent>
 			</Dialog>
-
-			{/* Register as a Vendor */}
-			<Dialog open={isVendorModalOpen} onOpenChange={setIsVendorModalOpen}>
-				<DialogContent className="sm:max-w-[425px]">
-					<DialogHeader>
-						<DialogTitle>Register as a Vendor</DialogTitle>
-						<DialogDescription>
-							Enter your details to register as a vendor and start selling your
-							products.
-						</DialogDescription>
-					</DialogHeader>
-					<form onSubmit={handleVendorRegistration}>
-						<div className="grid gap-4 py-4">
-							<div className="grid grid-cols-4 items-center gap-4">
-								<Label htmlFor="vendor-name" className="text-right">
-									Name
-								</Label>
-								<Input
-									id="vendor-name"
-									value={vendorName}
-									onChange={(e) => setVendorName(e.target.value)}
-									className="col-span-3"
-									required
-								/>
-							</div>
-							<div className="grid grid-cols-4 items-center gap-4">
-								<Label htmlFor="vendor-email" className="text-right">
-									Email
-								</Label>
-								<Input
-									id="vendor-email"
-									type="email"
-									value={vendorEmail}
-									onChange={(e) => setVendorEmail(e.target.value)}
-									className="col-span-3"
-									required
-								/>
-							</div>
-						</div>
-						<DialogFooter>
-							<Button type="submit">Register</Button>
-						</DialogFooter>
-					</form>
-				</DialogContent>
-			</Dialog>
-
-			{/* Your messages will appear here. */}
-			<Sheet open={isMessagesOpen} onOpenChange={setIsMessagesOpen}>
-				<SheetContent side="right" className="w-[300px] sm:w-[400px]">
-					<SheetHeader>
-						<SheetTitle>Messages</SheetTitle>
-					</SheetHeader>
-					<div className="py-4">
-						{/* Add your messages list component here */}
-						<p>Your messages will appear here.</p>
-					</div>
-				</SheetContent>
-			</Sheet>
-
-			{/* Products will appear here. */}
-			<Sheet open={isProductsOpen} onOpenChange={setIsProductsOpen}>
-				<SheetContent side="right" className="w-[300px] sm:w-[400px]">
-					<SheetHeader>
-						<SheetTitle>My Products</SheetTitle>
-					</SheetHeader>
-					<ScrollArea className="h-[calc(100vh-100px)] pr-4">
-						<div className="space-y-4 py-4">
-							{productMenuItems.map((item) => (
-								<Link
-									key={item.name}
-									href={item.href}
-									className="flex items-center justify-between py-2 text-sm hover:text-amber-600 transition-colors"
-									onClick={() => setIsProductsOpen(false)}>
-									<span>{item.name}</span>
-									<ChevronRight className="h-4 w-4" />
-								</Link>
-							))}
-						</div>
-					</ScrollArea>
-				</SheetContent>
-			</Sheet>
 		</header>
 	);
 }

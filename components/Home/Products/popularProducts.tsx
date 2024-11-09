@@ -121,14 +121,14 @@ const PopularProducts = () => {
 														<CreditCard className="w-4 h-4 mr-2" />
 														Buy Now
 													</Button>
-													<Button
+													{/* <Button
 														onClick={() => handleAddToCart(product.id)}
 														variant="default"
 														className="w-full bg-primary hover:bg-primary/90"
 														size="sm">
 														<ShoppingCart className="w-4 h-4 mr-2" />
 														Add to Cart
-													</Button>
+													</Button> */}
 												</div>
 											</div>
 
