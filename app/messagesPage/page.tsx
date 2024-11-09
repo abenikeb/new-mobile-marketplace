@@ -166,8 +166,8 @@ export default function VendorMessages() {
 	};
 
 	return (
-		<div className="container mx-auto p-6 space-y-8 bg-gray-50">
-			<div className="flex items-center justify-between mb-6">
+		<div className="container mx-auto p-6 mt-6 space-y-8 bg-gray-50">
+			{/* <div className="flex items-center justify-between mb-6">
 				<Button
 					variant="ghost"
 					className="text-blue-900 hover:text-blue-700"
@@ -176,7 +176,10 @@ export default function VendorMessages() {
 					Back to Dashboard
 				</Button>
 				<h1 className="text-3xl font-bold text-blue-900">Messages</h1>
-			</div>
+			</div> */}
+			<header className="bg-blue-900 text-white p-4 fixed top-0 right-0 left-0">
+				<h1 className="text-2xl font-bold">Messages</h1>
+			</header>
 
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				<Card className="md:col-span-1 bg-white shadow-md">

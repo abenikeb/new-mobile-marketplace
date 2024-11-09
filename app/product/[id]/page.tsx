@@ -93,7 +93,7 @@ export default function ProductPostPage() {
 
 	return (
 		<div className="container mx-auto px-4 py-3">
-			<header className="flex justify-between items-center mb-8">
+			<header className="flex justify-between items-center mb-3">
 				<Button variant="ghost" size="icon" asChild>
 					<Link href="/">
 						<ArrowLeft className="h-6 w-6" />
@@ -158,14 +158,14 @@ export default function ProductPostPage() {
 						))}
 					</div>
 				</div>
-				<div className="space-y-6">
+				<div className="space-y-3">
 					<div>
-						<h1 className="text-3xl font-bold">{product.name}</h1>
-						<div className="mt-2 flex items-baseline space-x-2">
-							<p className="text-3xl font-semibold text-primary">
+						<h1 className="text-2xl font-bold">{product.name}</h1>
+						<div className="mt-2 flex items-baseline space-x-3">
+							<p className="text-2xl font-semibold text-primary">
 								{product.discountPrice.toFixed(2)} Birr
 							</p>
-							<p className="text-xl text-muted-foreground line-through">
+							<p className="text-lg text-muted-foreground line-through">
 								{product.price.toFixed(2)} Birr
 							</p>
 							<Badge variant="destructive" className="text-sm">
